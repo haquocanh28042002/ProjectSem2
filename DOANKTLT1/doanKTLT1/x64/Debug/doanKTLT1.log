@@ -1,0 +1,5 @@
+﻿  console.cpp
+  Source.cpp
+  Generating Code...
+C:\Users\ACER\source\repos\doan\doanKTLT1\Source.cpp(26): warning C4715: 'key': not all control paths return a value
+  doanKTLT1.vcxproj -> C:\Users\ACER\source\repos\doan\x64\Debug\doanKTLT1.exe
