@@ -1,2 +1,5 @@
 ﻿  doanKTLT.cpp
+C:\Users\ACER\source\repos\doanKTLT\doanKTLT\doanKTLT.cpp(183,17): warning C4101: 'z': unreferenced local variable
+C:\Users\ACER\source\repos\doanKTLT\doanKTLT\doanKTLT.cpp(248,8): warning C4101: 't': unreferenced local variable
+C:\Users\ACER\source\repos\doanKTLT\doanKTLT\doanKTLT.cpp(248,6): warning C4101: 'n': unreferenced local variable
   doanKTLT.vcxproj -> C:\Users\ACER\source\repos\doanKTLT\x64\Debug\doanKTLT.exe
