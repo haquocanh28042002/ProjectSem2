@@ -2,13 +2,14 @@
 #define HeaderCourses_h
 
 #include <iostream>
-#include <stdio.h>
-#include <cmath>
-#include <Windows.h>
+#include <string>
+#include <io.h>
+#include <fcntl.h>
+#include <string>
+#include <windows.h>
 #include <fstream>
-#include <locale>
 #include <codecvt>
-#include <cstring>
+#include <locale>
 #include <iomanip>
 #define N 100
 using namespace std;
@@ -28,6 +29,8 @@ struct STAFF {
 	STAFF* pnext;
 };
 
-void ExportList(STUDENT*& S);
+void SetMode();
+void View_Courses_List(STUDENT*& S, wstring filename);
+void output_enroll_course(STUDENT* T);
 
 #endif 
