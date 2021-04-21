@@ -1,10 +1,11 @@
-﻿#include <iostream>
+﻿//	ID: 20127001
+//	Name: Ha Quoc Anh
+//	Class: 20CLC11
+
 #include "HeaderCourses.h"
-using namespace std;
 
-int main()
-{
-    return 0;
+int main() {
+
+	return 0;
 }
-
 

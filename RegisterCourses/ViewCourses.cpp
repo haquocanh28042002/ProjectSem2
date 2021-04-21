@@ -53,20 +53,16 @@ void View_Courses(STUDENT* T) {
 	}
 }
 
-void Read_Student_List(STAFF*& S, string filename) {
-	ifstream ip(filename);
-	if (!ip.is_open()) std::wcout << "File does not exist" << endl;
-
-	string no, studentid, name;
-	while (ip.good()) {
-		getline(ip, no, ',');
-		getline(ip, studentid, ',');
-		getline(ip, name, ',');
-
-		cout << "NO: " << no << endl;
-		cout << "Student ID: " << studentid << endl;
-		cout << "Name: " << name << endl;
+void Read_Student_List() {
+	const locale utf8_locale = locale(locale(), new codecvt_utf8<wchar_t>());
+	wifstream in("ListofStudent2.csv");
+	in.imbue(utf8_locale);
+	wstring a, temp;
+	getline(in, a);
+	wstringstream stream_in(a);
+	_setmode(_fileno(stdout), _O_WTEXT);
+	while (getline(stream_in, temp, L',')) {
+		wcout << temp << endl;
 	}
-
-	ip.close();
+	in.close();
 }
