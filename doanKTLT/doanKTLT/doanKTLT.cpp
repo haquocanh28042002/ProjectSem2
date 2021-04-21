@@ -26,10 +26,10 @@ struct STAFF
 	STAFF* pnext;
 };
 //đọc tài khoản cho sinh viên
-void input_student(STUDENT a[N], int& n) {
+void input_student(STUDENT a[N], int& n, wstring filestudent) {
 	int i;
 	wifstream filein;
-	filein.open("input.txt", ios_base::in);
+	filein.open(filestudent, ios_base::in);
 	filein.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filein.fail() == true) {
 		cout << "ERROR";
@@ -52,7 +52,7 @@ void login_student(STUDENT a[N], int n) {
 	getline(wcin, p);
 	system("cls");
 	for (int i = 0; i < n; i++) {
-		if (a[i + 1].userstudent == u ) {
+		if (a[i + 1].userstudent == u) {
 			while (a[i + 1].userstudent != u || a[i + 1].passwordstudent != p) {
 				wcout << "log in " << endl;
 				wcout << "username: ";
@@ -76,9 +76,9 @@ void login_student(STUDENT a[N], int n) {
 	}
 }
 //đăng nhập của staff
-void login_staff( STAFF a) {
-	const wstring u =L"ho tuan thanh" ;
-	const wstring p =L"123456";
+void login_staff(STAFF a) {
+	const wstring u = L"ho tuan thanh";
+	const wstring p = L"123456";
 	wcout << "log in" << endl;
 	wcout << "username: ";
 	getline(wcin, a.userstaff);
@@ -97,25 +97,24 @@ void login_staff( STAFF a) {
 	wcout << "Logged in successfully!!" << endl;
 }
 
-void read_file_course(STAFF*& S) {
-	wifstream enroll("enrollcourse.txt", ios_base::in);
+void read_file_course(STAFF*& S, wstring readfile) {
+	wifstream enroll;
+	enroll.open(readfile, ios_base::in);
 	enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (enroll.fail() == true) {
 		cout << "error";
 		system("pause");
 	}
-	S = new STAFF;
-	STAFF* pcur = S;
-	getline(enroll, pcur->no, L',');
-	getline(enroll, pcur->coursename, L',');
-	getline(enroll, pcur->teachername, L',');
-	getline(enroll, pcur->credit, L',');
-	getline(enroll, pcur->maxperson, L',');
-	getline(enroll, pcur->daylt, L',');
-	getline(enroll, pcur->dayth);
+	STAFF* pcur = nullptr;
 	while (!enroll.eof()) {
-		pcur->pnext = new STAFF;
-		pcur = pcur->pnext;
+		if (S == nullptr) {
+			S = new STAFF;
+			pcur = S;
+		}
+		else {
+			pcur->pnext = new STAFF;
+			pcur = pcur->pnext;
+		}
 		getline(enroll, pcur->no, L',');
 		getline(enroll, pcur->coursename, L',');
 		getline(enroll, pcur->teachername, L',');
@@ -145,7 +144,7 @@ void output_enroll_course(STAFF* S) {
 void delete_enroll(STAFF*& S) {
 	if (S == nullptr)return;
 	else {
-		STAFF* ptemp=nullptr;
+		STAFF* ptemp = nullptr;
 		while (S != nullptr) {
 			ptemp = S;
 			S = S->pnext;
@@ -176,14 +175,10 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 		output_enroll_course(S);
 		wcout << "choose enroll course(exit if input 0): ";
 		wcin >> t;
-		
-		//wcout << t << endl;
-		wcout << pcur->no << endl;
-		//if (pcur->no == t) wcout << pcur->no;
-		int count = 0,z;
-		
-		/*while (t != y) {
-			if (count == 3)break;
+		int count = 0, z;
+
+		while (t != y) {
+			if (count == 5)break;
 			while (pcur->no != t && pcur != nullptr)pcur = pcur->pnext;
 			if (pcur->no == t && pcur != nullptr) {
 				++count;
@@ -209,15 +204,15 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 			wcout << "choose enroll course(exit if input 0): ";
 			wcin >> t;
 			pcur = S;
-		}*/
+		}
 	}
 }
 
-void write_student_enroll_course(STUDENT* T) {
+void write_student_enroll_course(STUDENT* T, wstring writefile) {
 	if (T == nullptr) return;
 	else {
 		wfstream enroll;
-		enroll.open("writestudentenrollcourse.txt", ios_base::out);
+		enroll.open(writefile, ios_base::out);
 		enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 		STUDENT* pcur = T;
 		while (pcur != nullptr) {
@@ -225,7 +220,7 @@ void write_student_enroll_course(STUDENT* T) {
 			pcur = pcur->pnext;
 		}
 		pcur = T;
-		wcout << "NO" << setw(20) << "COURSENAME" << setw(20) << "TEACHERNAME" << setw(20) << "CREDIT" << setw(20) << "MAXPERSON" << setw(20) << "dayLT" << setw(20) << "DAYTH"<<endl;
+		wcout << "NO" << setw(20) << "COURSENAME" << setw(20) << "TEACHERNAME" << setw(20) << "CREDIT" << setw(20) << "MAXPERSON" << setw(20) << "dayLT" << setw(20) << "DAYTH" << endl;
 		while (pcur != nullptr) {
 			wcout << pcur->no << setw(20) << pcur->coursename << setw(20) << pcur->teachername << setw(20) << pcur->credit << setw(20) << pcur->maxperson << setw(20) << pcur->daylt << setw(20) << pcur->dayth;
 			wcout << endl;
@@ -245,8 +240,9 @@ int main() {
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
 	STUDENT K[N], * T = nullptr;
 	STAFF F, * S = nullptr;
-	int n,t;
-	/*wcout << "1)staff" << endl;
+	wstring filestudent = L"input.txt";
+	int n, t;
+	wcout << "1)staff" << endl;
 	wcout << "2)student" << endl;
 	wcout << "choose student or staff:" << endl;
 	wcin >> t;
@@ -259,17 +255,18 @@ int main() {
 		break;
 	}
 	case 2: {
-		input_student(K, n);
+		input_student(K, n, filestudent);
 		login_student(K, n);
 		break;
 	}
-	
-	}*/
-	read_file_course(S);
+
+	}
+	/*wstring readfile = L"enrollstaff.txt",writefile=L"writestudentenrollcourse.txt";
+	read_file_course(S, readfile);
 	//output_enroll_course(S);
 	student_enroll_course(T, S);
-	//write_student_enroll_course(T);
+	write_student_enroll_course(T,writefile);
 	delete_student_enroll_course(T);
-	delete_enroll(S);
+	delete_enroll(S);*/
 	return 0;
 }
