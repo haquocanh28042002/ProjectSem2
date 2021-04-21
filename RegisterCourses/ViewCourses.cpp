@@ -10,7 +10,7 @@ void SetMode() {
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
 }
 
-void View_Courses_List(STUDENT*& T, wstring filename) {
+void Read_Courses_List(STUDENT*& T, wstring filename) {
 	wifstream enroll(filename, ios_base::in);
 	enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (enroll.fail() == true) {
@@ -41,14 +41,32 @@ void View_Courses_List(STUDENT*& T, wstring filename) {
 	enroll.close();
 }
 
-void output_enroll_course(STUDENT* S) {
-	if (S == nullptr) return;
+void View_Courses(STUDENT* T) {
+	if (T == nullptr) return;
 	else {
 		wcout << "NO" << setw(20) << "COURSENAME" << setw(20) << "TEACHERNAME" << setw(20) << "CREDIT" << setw(20) << "MAXPERSON" << setw(20) << "dayLT" << setw(20) << "DAYTH" << endl;
-		while (S != nullptr) {
-			wcout << S->no << setw(20) << S->coursename << setw(20) << S->teachername << setw(20) << S->credit << setw(20) << S->maxperson << setw(20) << S->daylt << setw(20) << S->dayth;
+		while (T != nullptr) {
+			wcout << T->no << setw(20) << T->coursename << setw(20) << T->teachername << setw(20) << T->credit << setw(20) << T->maxperson << setw(20) << T->daylt << setw(20) << T->dayth;
 			wcout << endl;
-			S = S->pnext;
+			T = T->pnext;
 		}
 	}
+}
+
+void Read_Student_List(STAFF*& S, string filename) {
+	ifstream ip(filename);
+	if (!ip.is_open()) std::wcout << "File does not exist" << endl;
+
+	string no, studentid, name;
+	while (ip.good()) {
+		getline(ip, no, ',');
+		getline(ip, studentid, ',');
+		getline(ip, name, ',');
+
+		cout << "NO: " << no << endl;
+		cout << "Student ID: " << studentid << endl;
+		cout << "Name: " << name << endl;
+	}
+
+	ip.close();
 }

@@ -2,7 +2,7 @@
 #define HeaderCourses_h
 
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <io.h>
 #include <fcntl.h>
 #include <string>
@@ -30,7 +30,14 @@ struct STAFF {
 };
 
 void SetMode();
-void View_Courses_List(STUDENT*& S, wstring filename);
-void output_enroll_course(STUDENT* T);
+void Read_Courses_List(STUDENT*& T, wstring filename);
+void View_Courses(STUDENT* T);
+void Read_Student_List(STAFF*& S, string filename);
+
+
+
+
+
+
 
 #endif 
