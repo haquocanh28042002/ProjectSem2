@@ -20,10 +20,9 @@ struct STUDENT {
 	wstring passwordstudent;
 	wstring passwordnewstudent;
 	wstring no, coursename, teachername, credit, maxperson, daylt, dayth;
-	wstring No; wstring ID; wstring socialID;
-	wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
-	wstring totalmark; wstring midtermmark;
-	wstring finalmark; wstring orthermark;
+	wstring No, ID, socialID;
+	wstring firstname, lastname, gender, dateofbirth;
+	wstring totalmark, midtermmark, finalmark, orthermark,
 	STUDENT* pnext;
 };
 
