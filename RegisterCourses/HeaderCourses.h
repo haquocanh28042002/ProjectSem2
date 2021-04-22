@@ -12,7 +12,6 @@
 #include <locale>
 #include <iomanip>
 #include <sstream>
-using namespace std;
 #define N 100
 using namespace std;
 
