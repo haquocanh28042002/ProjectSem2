@@ -33,4 +33,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="course.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="course.csv" />
+  </ItemGroup>
 </Project>

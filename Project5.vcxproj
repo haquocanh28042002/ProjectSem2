@@ -147,6 +147,12 @@
     <ClInclude Include="Course.h" />
     <ClInclude Include="Menu.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="course.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="course.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
