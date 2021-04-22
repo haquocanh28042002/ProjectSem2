@@ -97,7 +97,7 @@ void login_staff(STAFF a) {
 	wcout << "Logged in successfully!!" << endl;
 }
 
-void read_file_course(STAFF*& S, wstring readfile) {
+void read_file_course_staff(STAFF*& S, wstring readfile) {
 	wifstream enroll;
 	enroll.open(readfile, ios_base::in);
 	enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
@@ -127,7 +127,7 @@ void read_file_course(STAFF*& S, wstring readfile) {
 	enroll.close();
 }
 
-void output_enroll_course(STAFF* S) {
+void output_enroll_course_staff(STAFF* S) {
 	if (S == nullptr)return;
 	else {
 		wcout << "NO" << setw(20) << "COURSENAME" << setw(20) << "TEACHERNAME" << setw(20) << "CREDIT" << setw(20) << "MAXPERSON" << setw(20) << "dayLT" << setw(20) << "DAYTH" << endl;
@@ -141,7 +141,7 @@ void output_enroll_course(STAFF* S) {
 
 
 
-void delete_enroll(STAFF*& S) {
+void delete_enroll_staff(STAFF*& S) {
 	if (S == nullptr)return;
 	else {
 		STAFF* ptemp = nullptr;
@@ -172,7 +172,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 		STAFF* pcur = S;
 		STUDENT* pcur1 = nullptr;
 		wstring t, y = L"0";
-		output_enroll_course(S);
+		output_enroll_course_staff(S);
 		wcout << "choose enroll course(exit if input 0): ";
 		wcin >> t;
 		int count = 0, z;
@@ -200,13 +200,14 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 				pcur1->pnext = nullptr;
 			}
 			system("cls");
-			output_enroll_course(S);
+			output_enroll_course_staff(S);
 			wcout << "choose enroll course(exit if input 0): ";
 			wcin >> t;
 			pcur = S;
 		}
 	}
 }
+
 
 void write_student_enroll_course(STUDENT* T, wstring writefile) {
 	if (T == nullptr) return;
@@ -230,6 +231,7 @@ void write_student_enroll_course(STUDENT* T, wstring writefile) {
 	}
 }
 
+
 int main() {
 	_setmode(_fileno(stdin), _O_U16TEXT);
 	_setmode(_fileno(stdout), _O_U16TEXT);
@@ -242,7 +244,7 @@ int main() {
 	STAFF F, * S = nullptr;
 	wstring filestudent = L"input.txt";
 	int n, t;
-	wcout << "1)staff" << endl;
+	/*wcout << "1)staff" << endl;
 	wcout << "2)student" << endl;
 	wcout << "choose student or staff:" << endl;
 	wcin >> t;
@@ -260,13 +262,13 @@ int main() {
 		break;
 	}
 
-	}
-	/*wstring readfile = L"enrollstaff.txt",writefile=L"writestudentenrollcourse.txt";
-	read_file_course(S, readfile);
-	//output_enroll_course(S);
+	}*/
+	wstring readfile = L"enrollstaff.txt",writefile=L"writestudentenrollcourse.txt";
+	read_file_course_staff(S, readfile);
+	//output_enroll_course_staff(S);
 	student_enroll_course(T, S);
 	write_student_enroll_course(T,writefile);
 	delete_student_enroll_course(T);
-	delete_enroll(S);*/
+	delete_enroll_staff(S);
 	return 0;
 }
