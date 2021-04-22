@@ -1,77 +1,307 @@
-﻿#include"console.h"
-#include<iostream>
-#include<conio.h>
+﻿#include<iostream>
+#include<string>
+#include <io.h>
+#include <fcntl.h>
+#include <string>
+#include <windows.h>
+#include<fstream>
+#include<codecvt>
+#include<locale>
 #include<iomanip>
-#define MAUNEN 1
-#define MAUCHU 7
+#define N 100
 using namespace std;
-typedef char str[31];
-str thaotac[2] = { "TEACHER","STUDENT" };
-enum TRANGTHAI{UP, DOWN, LEFT, RIGHT, ENTER, BACK};
-//1 phim mui ten len,xuong ,phai ,trai deu tra ve gia tri kep, muon xac dinh no co 2 cong doan
-//1:kieu int la 224
-//2:kieu char
-
-TRANGTHAI key(int z)//1:lên 2:xuống,3:enter
+struct STUDENT
 {
-	if (z == 224) {
-		char c;
-		c = _getch();
-		if (c == 72)return UP;
-		if (c == 80)return DOWN;
-		if (c == 77)return RIGHT;
-		if (c == 75)return LEFT;
+	wstring userstudent;
+	wstring passwordstudent;
+	wstring passwordnewstudent;
+	wstring no, coursename, teachername, credit, maxperson, daylt, dayth;
+	STUDENT* pnext;
+};
+struct STAFF
+{
+	wstring userstaff;
+	wstring passwordstaff;
+	wstring no, coursename, teachername, credit, maxperson, daylt, dayth;
+	STAFF* pnext;
+};
+//đọc tài khoản cho sinh viên
+void input_student(STUDENT a[N], int& n, wstring filestudent) {
+	int i;
+	wifstream filein;
+	filein.open(filestudent, ios_base::in);
+	filein.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	if (filein.fail() == true) {
+		cout << "ERROR";
+		system("pause");
 	}
-	else if (z == 13) return ENTER;
+	filein >> n;
+	for (i = 0; i < n; i++) {
+		getline(filein, a[i + 1].userstudent, L',');
+		getline(filein, a[i + 1].passwordstudent);
+	}
 }
-int menu(str thaotac[2], int n) {
-	int tt = 0;// bien chi ra dang o thao tac nao , tt=0 la chi thao tac 1
-		int* mau = new int[n];
-		for (int i = 0; i < n; i++) 
-			mau[i] = MAUCHU;
-		mau[0] = MAUNEN;//dang o thao tac 1
-		//dung vong while vo han cho den khi tra ve gia tri ham thi tu dong dung
-		while (1) {
-			//in ra man hinh giao dien menu
-			clrscr();//reset lai man hinh
-			for (int i = 0; i < n; i++) {
-				TextColor(mau[i]);//doi mau chu cho chu chuan bi in ra man hinh
-				cout <<setw(50)<< i + 1<<") " << thaotac[i] << endl;
+
+//đăng nhập của sinh viên
+void login_student(STUDENT a[N], int n) {
+	wstring u, p;
+	wcout << "log in " << endl;
+	wcout << "username: ";
+	getline(wcin, u);
+	wcout << "password: ";
+	getline(wcin, p);
+	system("cls");
+	for (int i = 0; i < n; i++) {
+		if (a[i + 1].userstudent == u) {
+			while (a[i + 1].userstudent != u || a[i + 1].passwordstudent != p) {
+				wcout << "log in " << endl;
+				wcout << "username: ";
+				getline(wcin, u);
+				wcout << "password: ";
+				getline(wcin, p);
+				system("cls");
 			}
-			int z = _getch();
-			TRANGTHAI trangthai = key(z);
-			switch (trangthai)
-			{
-			case UP: {
-				if (tt == 0) {
-					tt = n - 1;
+			if (a[i + 1].userstudent == u && a[i + 1].passwordstudent == p) {
+				wcout << "change password";
+				getline(wcin, a[i + 1].passwordnewstudent);
+				system("cls");
+				while (a[i + 1].passwordnewstudent == p) {
+					wcout << "change password";
+					getline(wcin, a[i + 1].passwordnewstudent);
+					system("cls");
+				}
+				wcout << "Logged in successfully!!";
+			}
+		}
+	}
+}
+//đăng nhập của staff
+void login_staff(STAFF a) {
+	const wstring u = L"ho tuan thanh";
+	const wstring p = L"123456";
+	wcout << "log in" << endl;
+	wcout << "username: ";
+	getline(wcin, a.userstaff);
+	wcout << "password: ";
+	getline(wcin, a.passwordstaff);
+	system("cls");
+	while (a.userstaff != u || a.passwordstaff != p) {
+		wcout << "input user or password is fail!!!" << endl;
+		wcout << "username: ";
+		getline(wcin, a.userstaff);
+		wcout << "password: ";
+		getline(wcin, a.passwordstaff);
+		system("cls");
+	}
+	system("cls");
+	wcout << "Logged in successfully!!" << endl;
+}
+
+void read_file_course_staff(STAFF*& S, wstring readfile) {
+	wifstream enroll;
+	enroll.open(readfile, ios_base::in);
+	enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	if (enroll.fail() == true) {
+		cout << "error";
+		system("pause");
+	}
+	STAFF* pcur = nullptr;
+	while (!enroll.eof()) {
+		if (S == nullptr) {
+			S = new STAFF;
+			pcur = S;
+		}
+		else {
+			pcur->pnext = new STAFF;
+			pcur = pcur->pnext;
+		}
+		getline(enroll, pcur->no, L',');
+		getline(enroll, pcur->coursename, L',');
+		getline(enroll, pcur->teachername, L',');
+		getline(enroll, pcur->credit, L',');
+		getline(enroll, pcur->maxperson, L',');
+		getline(enroll, pcur->daylt, L',');
+		getline(enroll, pcur->dayth);
+		pcur->pnext = nullptr;
+	}
+	enroll.close();
+}
+
+void output_enroll_course_staff(STAFF* S) {
+	if (S == nullptr)return;
+	else {
+		wcout << "NO" << setw(20) << "COURSENAME" << setw(20) << "TEACHERNAME" << setw(20) << "CREDIT" << setw(20) << "MAXPERSON" << setw(20) << "dayLT" << setw(20) << "DAYTH" << endl;
+		while (S != nullptr) {
+			wcout << S->no << setw(20) << S->coursename << setw(20) << S->teachername << setw(20) << S->credit << setw(20) << S->maxperson << setw(20) << S->daylt << setw(20) << S->dayth;
+			wcout << endl;
+			S = S->pnext;
+		}
+	}
+}
+
+
+void delete_enroll_staff(STAFF*& S) {
+	if (S == nullptr)return;
+	else {
+		STAFF* ptemp = nullptr;
+		while (S != nullptr) {
+			ptemp = S;
+			S = S->pnext;
+			delete ptemp;
+			ptemp = nullptr;
+		}
+	}
+}
+
+void delete_student_enroll_course(STUDENT*& T) {
+	if (T == nullptr)return;
+	else {
+		STUDENT* ptemp = nullptr;
+		while (T != nullptr) {
+			ptemp = T;
+			T = T->pnext;
+			delete ptemp;
+			ptemp = nullptr;
+		}
+	}
+}
+void student_enroll_course(STUDENT*& T, STAFF* S) {
+	if (S == nullptr)return;
+	else {
+		STAFF* pcur = S;
+		STUDENT* pcur1 = nullptr;
+		wstring t, y = L"0";
+		output_enroll_course_staff(S);
+		wcout << "choose enroll course(exit if input 0): ";
+		wcin >> t;
+		int count = 0, z;
+
+		while (t != y) {
+			while (pcur->no != t && pcur != nullptr)pcur = pcur->pnext;
+			if (pcur->no == t && pcur != nullptr) {
+				++count;
+				if (T == nullptr) {
+					T = new STUDENT;
+					pcur1 = T;
 				}
 				else {
-					tt--;
+					pcur1->pnext = new STUDENT;
+					pcur1 = pcur1->pnext;
 				}
-				break;
+				pcur1->no = pcur->no;
+				pcur1->coursename = pcur->coursename;
+				pcur1->teachername = pcur->teachername;
+				pcur1->credit = pcur->credit;
+				pcur1->maxperson = pcur->maxperson;
+				pcur1->daylt = pcur->daylt;
+				pcur1->dayth = pcur->dayth;
+				pcur1->pnext = nullptr;
 			}
-			case DOWN: {
-				if (tt == n - 1) {
-					tt = 0;
-				}
-				else{
-					tt++;
-				}
-				break;
-			}
-			case ENTER: return tt;
-			}
-			//reset lai mau truoc khi chon lai thao tac de in ra
-			for (int i = 0; i < n; i++)
-				mau[i] = MAUCHU;
-			mau[tt] = MAUNEN;
-			delete[]mau;
+			if (count == 5)break;
+			system("cls");
+			output_enroll_course_staff(S);
+			wcout << "choose enroll course(exit if input 0): ";
+			wcin >> t;
+			pcur = S;
 		}
+	}
 }
+
+void output_enroll_course_student(STUDENT* T) {
+	STUDENT* pcur = T;
+	wcout << "NO" << setw(20) << "COURSENAME" << setw(20) << "TEACHERNAME" << setw(20) << "CREDIT" << setw(20) << "MAXPERSON" << setw(20) << "dayLT" << setw(20) << "DAYTH" << endl;
+	while (pcur != nullptr) {
+		wcout << pcur->no << setw(20) << pcur->coursename << setw(20) << pcur->teachername << setw(20) << pcur->credit << setw(20) << pcur->maxperson << setw(20) << pcur->daylt << setw(20) << pcur->dayth;
+		wcout << endl;
+		pcur = pcur->pnext;
+	}
+}
+
+void remove_course_student(STUDENT*& T) {
+	if (T == nullptr)return;
+	else {
+		wstring t, y = L"0";
+		STUDENT* pcur = T;
+		STUDENT* ptemp = nullptr;
+		cout << "input course to remove(exit if input 0): ";
+		wcin >> t;
+		while (t != y) {
+			while (pcur->pnext->no != t && pcur->pnext != nullptr)pcur = pcur->pnext;
+			if (pcur->pnext->no == t && pcur->pnext != nullptr) {
+				ptemp = pcur->pnext;
+				pcur->pnext = pcur->pnext->pnext;
+				delete ptemp;
+				ptemp = nullptr;
+			}
+			pcur = T;
+			if (T->no == t && T != nullptr) {
+				ptemp = T;
+				T = T->pnext;
+				delete ptemp;
+				ptemp = nullptr;
+			}
+			pcur = T;
+			wcout << "input course to remove(exit if input 0): ";
+			wcin >> t;
+		}
+	}
+}
+
+void write_student_enroll_course(STUDENT* T, wstring writefile) {
+	if (T == nullptr) return;
+	else {
+		wfstream enroll;
+		enroll.open(writefile, ios_base::out);
+		enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+		STUDENT* pcur = T;
+		while (pcur != nullptr) {
+			enroll << pcur->no << "," << pcur->coursename << "," << pcur->teachername << "," << pcur->credit << "," << pcur->maxperson << "," << pcur->daylt << "," << pcur->dayth << endl;
+			pcur = pcur->pnext;
+		}
+		enroll.close();
+	}
+}
+
+
 int main() {
-	//system("color xx") x dau la mau chu, x sau la mau nen
-	cout<<menu(thaotac, 2);
-	system("pause");
+	_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	HANDLE hdlConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_FONT_INFOEX consoleFont;
+	consoleFont.cbSize = sizeof(consoleFont);
+	GetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
+	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
+	STUDENT K[N], * T = nullptr;
+	STAFF F, * S = nullptr;
+	wstring filestudent = L"input.txt";
+	int n, t;
+	/*wcout << "1)staff" << endl;
+	wcout << "2)student" << endl;
+	wcout << "choose student or staff:" << endl;
+	wcin >> t;
+	system("cls");
+	wcin.ignore(1000, '\n');
+	switch (t)
+	{
+	case 1: {
+		login_staff(F);
+		break;
+	}
+	case 2: {
+		input_student(K, n, filestudent);
+		login_student(K, n);
+		break;
+	}
+
+	}*/
+	wstring readfile = L"enrollstaff.txt", writefile = L"writestudentenrollcourse.txt";
+	read_file_course_staff(S, readfile);
+	//output_enroll_course_staff(S);
+	student_enroll_course(T, S);
+	output_enroll_course_student(T);
+	remove_course_student(T);
+	write_student_enroll_course(T, writefile);
+	delete_student_enroll_course(T);
+	delete_enroll_staff(S);
 	return 0;
 }
