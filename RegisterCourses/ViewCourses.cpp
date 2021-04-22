@@ -10,35 +10,58 @@ void SetMode() {
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
 }
 
-void Read_Courses_List(STUDENT*& T, wstring filename) {
-	wifstream enroll(filename, ios_base::in);
-	enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-	if (enroll.fail() == true) {
-		cout << "error";
+void Read_Student_List(STAFF*& S, wstring filename) {
+	wifstream filelist;
+	filelist.open(filename, ios_base::in);
+	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	if (filelist.fail() == true) {
+		cout << "File does not exist." << endl;
 		system("pause");
 	}
-	T = new STUDENT;
-	STUDENT* pcur = T;
-	getline(enroll, pcur->no, L',');
-	getline(enroll, pcur->coursename, L',');
-	getline(enroll, pcur->teachername, L',');
-	getline(enroll, pcur->credit, L',');
-	getline(enroll, pcur->maxperson, L',');
-	getline(enroll, pcur->daylt, L',');
-	getline(enroll, pcur->dayth);
-	while (!enroll.eof()) {
-		pcur->pnext = new STUDENT;
-		pcur = pcur->pnext;
-		getline(enroll, pcur->no, L',');
-		getline(enroll, pcur->coursename, L',');
-		getline(enroll, pcur->teachername, L',');
-		getline(enroll, pcur->credit, L',');
-		getline(enroll, pcur->maxperson, L',');
-		getline(enroll, pcur->daylt, L',');
-		getline(enroll, pcur->dayth);
-		pcur->pnext = nullptr;
+	else {
+		S = new STAFF;
+		STAFF* pcur = S;
+		wstring No; wstring ID;
+		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
+		while (!filelist.eof()) {
+			if (phead == nullptr) {
+				phead = new node;
+				pcur = phead;
+			}
+			else {
+				pcur->pnext = new node;
+				pcur = pcur->pnext;
+				pcur->pnext = nullptr;
+			}
+			getline(filelist, No, L',');
+			getline(filelist, ID, L',');
+			getline(filelist, firstname, L',');
+			getline(filelist, lastname, L',');
+			getline(student, gender, L',');
+			
+			pcur->No = No;
+			pcur->firstname = firstname;
+			pcur->lastname = lastname;
+			pcur->ID = ID;
+			pcur->gender = gender;
+			pcur->dateofbirth = dateofbirth;
+			pcur->pnext = nullptr;
+		}
 	}
-	enroll.close();
+	filelist.close();
+}
+
+void View_List(STAFF*& S) {
+	if (S == nullptr) return;
+	STAFF* pcur = S;
+	else {
+		wcout << "No" << setw(20) << "StudentID" << setw(20) << "Firstname" << setw(20) << "Lastname" << setw(20) << "Gender" << setw(20) << "DayofBirth" << endl;
+		while (S != nullptr) {
+			wcout << S->no << setw(20) << S->studentid << setw(10) << S->firstname << setw(20) << S->lastname << setw(20) << S->gender << setw(20) << S->dateofbirth;
+			wcout << endl;
+			S = S->pnext;
+		}
+	}
 }
 
 void View_Courses(STUDENT* T) {
@@ -53,16 +76,31 @@ void View_Courses(STUDENT* T) {
 	}
 }
 
-void Read_Student_List() {
-	const locale utf8_locale = locale(locale(), new codecvt_utf8<wchar_t>());
-	wifstream in("ListofStudent2.csv");
-	in.imbue(utf8_locale);
-	wstring a, temp;
-	getline(in, a);
-	wstringstream stream_in(a);
-	_setmode(_fileno(stdout), _O_WTEXT);
-	while (getline(stream_in, temp, L',')) {
-		wcout << temp << endl;
-	}
+void Read_Student_List(STUDENT *T, wstring filename) {
+	std::wifstream filelist;
+	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	
 	in.close();
+}
+
+
+std::ifstream file;
+
+	file.open("test.csv");
+
+	std::string line;
+	std::string value;
+	std::string temp;
+	
+	if (file)
+		//while (getline(file, line)) {
+		while(file.good()){
+
+			getline(file, value, ',');
+			std::cout << std::setw(10);
+			std::cout << value;
+			
+		}
+	else
+		std::cout << "Failed to open File" << std::endl;
 }
