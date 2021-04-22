@@ -31,11 +31,12 @@ struct STAFF {
 };
 
 void SetMode();
-void Read_Courses_List(STUDENT*& T, wstring filename);
+void Read_Student_List(STAFF*& S, wstring filename);
+void View_List(STAFF*& S);
+void Read_File_Courses(STAFF*& S, wstring filecoursesname);
 void View_Courses(STUDENT* T);
-void Read_Student_List(STAFF*& S, string filename);
-
-
+void Delete_Student_List(STAFF*& S);
+void Delete_Courses_List(STUDENT*& T);
 
 
 
