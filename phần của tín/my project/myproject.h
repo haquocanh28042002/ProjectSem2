@@ -25,6 +25,6 @@ void addnewstudent(wstring classx, node* phead);
 void inputstudentscore(wstring classx, node*& phead);
 void liststudent(node* phead);
 void liststudentwithscore(node* phead);
-void importscoreboard(wstring classx, node*& phead);
+//void importscoreboard(wstring classx, node*& phead);
 void deletelist(node*& phead);
-void addscoreofnewstudet(wstring classx, node* phead);
+//void addscoreofnewstudet(wstring classx, node* phead);

@@ -53,7 +53,6 @@ void addnewstudent(wstring classx, node* phead)
 	wofstream student;
 	student.open(classx, ios::out | ios::app);
 	student.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-	student << s;
 	student << endl;
 	student << pcur->No << s << pcur->firstname << s << pcur->lastname << s << pcur->ID << s << pcur->gender << s << pcur->dateofbirth << s << pcur->socialID;
 
@@ -82,10 +81,10 @@ void inputstudentscore(wstring classx, node*& phead)
 	else
 	{
 		node* pcur = nullptr;
-		wstring No; wstring ID; wstring socialID;
+	/*	wstring No; wstring ID; wstring socialID;
 		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
 		wstring totalmark; wstring midtermmark;
-		wstring finalmark; wstring orthermark;
+		wstring finalmark; wstring orthermark;*/
 		while (!student.eof())
 		{
 			if (phead == nullptr)
@@ -99,30 +98,18 @@ void inputstudentscore(wstring classx, node*& phead)
 				pcur = pcur->pnext;
 				pcur->pnext = nullptr;
 			}
-			getline(student, No, L',');
-			getline(student, firstname, L',');
-			getline(student, lastname, L',');
-			getline(student, ID, L',');
-			getline(student, gender, L',');
-			getline(student, dateofbirth, L',');
-			getline(student, socialID, L',');
-			getline(student, midtermmark, L',');
+			getline(student, pcur->No, L',');
+			getline(student, pcur->firstname, L',');
+			getline(student,pcur->lastname, L',');
+			getline(student, pcur->ID, L',');
+			getline(student, pcur->gender, L',');
+			getline(student,pcur->dateofbirth, L',');
+			getline(student, pcur->socialID, L',');
+			getline(student,pcur->midtermmark, L',');
 			//wcin.ignore();
-			getline(student, finalmark, L',');
-			getline(student, totalmark, L',');
-			getline(student, orthermark, L',');
-			getline(student, finalmark);
-			pcur->No = No;
-			pcur->firstname = firstname;
-			pcur->lastname = lastname;
-			pcur->ID = ID;
-			pcur->gender = gender;
-			pcur->dateofbirth = dateofbirth;
-			pcur->socialID = socialID;
-			pcur->finalmark = finalmark;
-			pcur->midtermmark = midtermmark;
-			pcur->orthermark = orthermark;
-			pcur->totalmark = totalmark;
+			getline(student, pcur->finalmark, L',');
+			getline(student, pcur->orthermark, L',');
+			getline(student,pcur->totalmark);
 			pcur->pnext = nullptr;
 
 		}
