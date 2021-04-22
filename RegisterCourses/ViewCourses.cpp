@@ -64,6 +64,36 @@ void View_List(STAFF*& S) {
 	}
 }
 
+void Read_File_Courses(STAFF*& S, wstring filecoursesname) {
+	wifstream filecourses;
+	filecourses.open(filecoursesname, ios_base::in);
+	filecourses.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	if (filecourses.fail() == true) {
+		cout << "File does not exist" << endl;
+		system("pause");
+	}
+	STAFF* pcur = nullptr;
+	while (!filecourses.eof()) {
+		if (S == nullptr) {
+			S = new STAFF;
+			pcur = S;
+		}
+		else {
+			pcur->pnext = new STAFF;
+			pcur = pcur->pnext;
+		}
+		getline(filecourses, pcur->no, L',');
+		getline(filecourses, pcur->coursename, L',');
+		getline(filecourses, pcur->teachername, L',');
+		getline(filecourses, pcur->credit, L',');
+		getline(filecourses, pcur->maxperson, L',');
+		getline(filecourses, pcur->daylt, L',');
+		getline(filecourses, pcur->dayth);
+		pcur->pnext = nullptr;
+	}
+	filecourses.close();
+}
+
 void View_Courses(STUDENT* T) {
 	if (T == nullptr) return;
 	else {
@@ -76,31 +106,31 @@ void View_Courses(STUDENT* T) {
 	}
 }
 
-void Read_Student_List(STUDENT *T, wstring filename) {
-	std::wifstream filelist;
-	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-	
-	in.close();
-}
-
-
-std::ifstream file;
-
-	file.open("test.csv");
-
-	std::string line;
-	std::string value;
-	std::string temp;
-	
-	if (file)
-		//while (getline(file, line)) {
-		while(file.good()){
-
-			getline(file, value, ',');
-			std::cout << std::setw(10);
-			std::cout << value;
-			
+void Delete_Student_List(STAFF*& S) {
+	if (S == nullptr) return;
+	else {
+		STAFF* ptemp = nullptr;
+		while (S != nullptr) {
+			ptemp = S;
+			S = S->pnext;
+			delete ptemp;
+			ptemp = nullptr;
 		}
-	else
-		std::cout << "Failed to open File" << std::endl;
+	}
 }
+
+void Delete_Courses_List(STUDENT*& T) {
+	if (T == nullptr) return;
+	else {
+		STAFF* ptemp = nullptr;
+		while (T != nullptr) {
+			ptemp = T;
+			T = T->pnext;
+			delete ptemp;
+			ptemp = nullptr;
+		}
+	}
+}
+
+
+
