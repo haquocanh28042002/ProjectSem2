@@ -217,35 +217,29 @@ void output_enroll_course_student(STUDENT* T) {
 	}
 }
 
-void remove_course_student(STUDENT*& T) {
+void remove_course_student(STUDENT*& T, wstring x) {
 	if (T == nullptr)return;
 	else {
-		wstring t, y = L"0";
-		STUDENT* pcur = T;
 		STUDENT* ptemp = nullptr;
-		cout << "input course to remove(exit if input 0): ";
-		wcin >> t;
-		while (t != y) {
-			while (pcur->pnext->no != t && pcur->pnext != nullptr)pcur = pcur->pnext;
-			if (pcur->pnext->no == t && pcur->pnext != nullptr) {
-				ptemp = pcur->pnext;
-				pcur->pnext = pcur->pnext->pnext;
-				delete ptemp;
-				ptemp = nullptr;
-			}
-			pcur = T;
-			if (T->no == t && T != nullptr) {
-				ptemp = T;
-				T = T->pnext;
-				delete ptemp;
-				ptemp = nullptr;
-			}
-			pcur = T;
-			wcout << "input course to remove(exit if input 0): ";
-			wcin >> t;
+		if (T->no == x && T != nullptr) {
+			ptemp = T;
+			T = T->pnext;
+			delete ptemp;
+			ptemp = nullptr;
+			return;
+		}
+		STUDENT* pcur = T;
+		while (pcur->pnext->no != x && pcur->pnext != nullptr)pcur = pcur->pnext;
+		if (pcur->pnext->no == x && pcur->pnext != nullptr) {
+			ptemp = pcur->pnext;
+			pcur->pnext = pcur->pnext->pnext;
+			delete ptemp;
+			ptemp = nullptr;
 		}
 	}
 }
+
+
 
 void write_student_enroll_course(STUDENT* T, wstring writefile) {
 	if (T == nullptr) return;
@@ -274,6 +268,7 @@ int main() {
 	STUDENT K[N], * T = nullptr;
 	STAFF F, * S = nullptr;
 	wstring filestudent = L"input.txt";
+	wstring x;
 	int n, t;
 	/*wcout << "1)staff" << endl;
 	wcout << "2)student" << endl;
@@ -299,7 +294,14 @@ int main() {
 	//output_enroll_course_staff(S);
 	student_enroll_course(T, S);
 	output_enroll_course_student(T);
-	remove_course_student(T);
+	wcout << "input course to remove(exit if input 0): ";
+	wcin >> x;
+	while (x != L"0") {
+		remove_course_student(T, x);
+		wcout << "input course to remove(exit if input 0): ";
+		wcin >> x;
+	}
+	output_enroll_course_student(T);
 	write_student_enroll_course(T, writefile);
 	delete_student_enroll_course(T);
 	delete_enroll_staff(S);
