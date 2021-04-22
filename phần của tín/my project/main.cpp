@@ -7,7 +7,16 @@ void menu()
     wstring class2 = L"inputstudentscore2.txt";
     wstring class3 = L"inputstudentscore3.txt";
     wstring class4 = L"inputstudentscore4.txt";
-    wcout << "school year: 2020-2021\n";
+    int a = 2021; int b = 2024;
+    wcout << "\nschool year: " << a << "-" << b << endl;
+   switch (a)
+   {
+   case 2021:  wcout << "1st year student \n"; break;
+   case 2022: wcout << "2st year student \n"; break;
+   case 2023:  wcout << "3st year student \n"; break;
+   case 2024:  wcout << "4st year student \n"; break;
+   case 0: break;
+    }
     int n = 1;
     while (n != 0)
     {
