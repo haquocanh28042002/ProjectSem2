@@ -34,7 +34,7 @@ int menu(str thaotac[4], int n) {
 		//in giao dien menu
 		for (int i = 0; i < n; i++) {
 			TextColor(mau[i]);
-//			gotoXY(50, 10 + i);
+			//			gotoXY(50, 10 + i);
 			cout << thaotac[i] << endl;
 		}
 
@@ -58,9 +58,9 @@ int menu(str thaotac[4], int n) {
 		mau[tt] = MAUNEN;
 		clrscr();
 		if (k == 1) {
-			int tmp=1;
+			int tmp = 1;
 			clrscr();
-			if (tt == 0){
+			if (tt == 0) {
 				addnewcourse();
 				wcout << "0. Back ";
 				wcin >> tmp;
@@ -68,24 +68,18 @@ int menu(str thaotac[4], int n) {
 				break;
 			}
 			if (tt == 1) {
-				/*  course* phead = nullptr;
+				course* phead = nullptr;
 				inputlistcourse(phead);
 				xemlist(phead);
-				wstring t;
-				wcout << "Nhập ID môn học cần xóa: " << endl;
-				wcin >> t;
-				deletecourse(phead,t);
-				fstream f;
-				f.open("course.csv", ios::out||ios::trunc);
-				outputlistcourse(phead);
-				phead = nullptr;
-				inputlistcourse(phead);
-				clrscr();
-				xemlist(phead);
-				break;
-				f.close();*/
 				wcout << "Delete ID course: " << endl;
-
+				wstring t;
+				wcin >> t;
+				deletecourse(phead, t);
+				xemlist(phead);
+				//fstream f;
+				//f.open("course.csv", ios::out);
+				//f.close();
+				outputlistcourse(phead);
 				break;
 			}
 			if (tt == 2) {

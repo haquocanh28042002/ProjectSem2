@@ -49,7 +49,7 @@ void inputlistcourse(course* &phead) {
 	getline(f, pcur->dow1, L',');
 	getline(f, pcur->s1, L',');
 	getline(f, pcur->dow2, L',');
-	getline(f, pcur->s2, L',');
+	getline(f, pcur->s2);
 	while (!f.eof()) {
 		pcur->pNext = new course;
 		pcur = pcur->pNext;
@@ -60,12 +60,13 @@ void inputlistcourse(course* &phead) {
 		getline(f, pcur->dow1, L',');
 		getline(f, pcur->s1, L',');
 		getline(f, pcur->dow2, L',');
-		getline(f, pcur->s2, L',');
+		getline(f, pcur->s2);
 		pcur->pNext = nullptr;
 	}
 	f.close();
 }
 void xemlist(course* phead) {
+	clrscr();
 	course* pcur = phead;
 	while (pcur != nullptr) {
 		wcout << pcur->IDcourse << " ";
@@ -75,7 +76,7 @@ void xemlist(course* phead) {
 		wcout << pcur->dow1 << " ";
 		wcout << pcur->s1 << " ";
 		wcout << pcur->dow2 << " ";
-		wcout << pcur->s2 << " ";
+		wcout << pcur->s2 << " " << endl;
 		pcur = pcur->pNext;
 	}
 	return;
@@ -83,7 +84,10 @@ void xemlist(course* phead) {
 void deletecourse(course*& phead, wstring t) {
 	course* pcur = phead;
 	if (pcur->IDcourse == t) {
+		course* tmp = phead;
 		phead = phead->pNext;
+		delete tmp;
+		tmp = nullptr;
 		return;
 	}
 	while (pcur->pNext != nullptr) {
@@ -97,17 +101,17 @@ void deletecourse(course*& phead, wstring t) {
 }
 void outputlistcourse(course* phead) {
 	wfstream f;
-	f.open("course.csv", ios::out | ios::app);
+	f.open("course.csv", ios::out);
 	course* pcur = phead;
 	while (pcur != nullptr) {
-		f << pcur->IDcourse << " ";
-		f << pcur->namecourse << " ";
-		f << pcur->teacher << " ";
-		f << pcur->credit << " ";
-		f << pcur->dow1 << " ";
-		f << pcur->s1 << " ";
-		f << pcur->dow2 << " ";
-		f << pcur->s2 << " ";
+		f << pcur->IDcourse << ",";
+		f << pcur->namecourse << ",";
+		f << pcur->teacher << ",";
+		f << pcur->credit << ",";
+		f << pcur->dow1 << ",";
+		f << pcur->s1 << ",";
+		f << pcur->dow2 << ",";
+		f << pcur->s2 << endl;
 		pcur = pcur->pNext;
 	}
 	f.close();
