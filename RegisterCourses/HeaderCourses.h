@@ -20,6 +20,10 @@ struct STUDENT {
 	wstring passwordstudent;
 	wstring passwordnewstudent;
 	wstring no, coursename, teachername, credit, maxperson, daylt, dayth;
+	wstring No; wstring ID; wstring socialID;
+	wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
+	wstring totalmark; wstring midtermmark;
+	wstring finalmark; wstring orthermark;
 	STUDENT* pnext;
 };
 
@@ -30,6 +34,15 @@ struct STAFF {
 	STAFF* pnext;
 };
 
+struct node
+{
+	wstring No; wstring ID; wstring socialID;
+	wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
+	wstring totalmark; wstring midtermmark;
+	wstring finalmark; wstring orthermark;
+	node* pnext;
+};
+
 void SetMode();
 void Read_Student_List(STAFF*& S, wstring filename);
 void View_List(STAFF*& S);
@@ -37,7 +50,7 @@ void Read_File_Courses(STAFF*& S, wstring filecoursesname);
 void View_Courses(STUDENT* T);
 void Delete_Student_List(STAFF*& S);
 void Delete_Courses_List(STUDENT*& T);
-
+void Write_Student_To_FileCourses(STUDENT*& T, wstring filename);
 
 
 
