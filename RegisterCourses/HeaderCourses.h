@@ -23,7 +23,11 @@ struct STUDENT {
 	wstring No, ID, socialID;
 	wstring firstname, lastname, gender, dateofbirth;
 	wstring totalmark, midtermmark, finalmark, orthermark,
+<<<<<<< Updated upstream
 	STUDENT* pnext;
+=======
+		STUDENT* pnext;
+>>>>>>> Stashed changes
 };
 
 struct STAFF {
