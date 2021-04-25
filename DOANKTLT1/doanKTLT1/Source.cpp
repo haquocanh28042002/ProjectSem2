@@ -263,9 +263,9 @@ void remove_course_student(STUDENT*& T, wstring x) {
 void write_student_enroll_course(STUDENT* T, wstring writefile) {
 	if (T == nullptr) return;
 	else {
-		wfstream enroll;
+		wofstream enroll;
 		enroll.open(writefile, ios_base::out);
-		enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+		enroll.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::generate_header>));
 		STUDENT* pcur = T;
 		while (pcur != nullptr) {
 			enroll << pcur->no << "," << pcur->coursename << "," << pcur->teachername << "," << pcur->credit << "," << pcur->maxperson << "," << pcur->daylt << "," << pcur->dayth << endl;
@@ -308,7 +308,7 @@ int main() {
 	}
 
 	}*/
-	wstring readfile = L"enrollstaff.txt", writefile = L"writestudentenrollcourse.csv";
+	wstring readfile = L"enrollstaff.csv", writefile = L"writestudentenrollcourse.csv";
 	read_file_course_staff(S, readfile);
 	//output_enroll_course_staff(S);
 	student_enroll_course(T, S);
