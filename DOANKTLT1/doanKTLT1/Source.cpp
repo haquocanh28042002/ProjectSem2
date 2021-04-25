@@ -165,6 +165,18 @@ void delete_student_enroll_course(STUDENT*& T) {
 		}
 	}
 }
+
+bool check_enroll_same(STUDENT* T, wstring t) {
+	if (T == nullptr) return true;
+	STUDENT* pcur = T;
+	while (pcur != nullptr) {
+		if (pcur->no == t) {
+			return false;
+		}
+		pcur = pcur->pnext;
+	}
+	return true;
+}
 void student_enroll_course(STUDENT*& T, STAFF* S) {
 	if (S == nullptr)return;
 	else {
@@ -177,6 +189,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 		int count = 0, z;
 
 		while (t != y) {
+
 			while (pcur->no != t && pcur != nullptr)pcur = pcur->pnext;
 			if (pcur->no == t && pcur != nullptr) {
 				++count;
@@ -202,6 +215,12 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 			output_enroll_course_staff(S);
 			wcout << "choose enroll course(exit if input 0): ";
 			wcin >> t;
+			/*if (check_enroll_same(T, t) == false) {
+				cout << "trung";
+				output_enroll_course_staff(S);
+				wcout << "choose enroll course(exit if input 0): ";
+				wcin >> t;
+			}*/
 			pcur = S;
 		}
 	}
@@ -289,21 +308,22 @@ int main() {
 	}
 
 	}*/
-	wstring readfile = L"enrollstaff.txt", writefile = L"writestudentenrollcourse.txt";
+	wstring readfile = L"enrollstaff.txt", writefile = L"writestudentenrollcourse.csv";
 	read_file_course_staff(S, readfile);
 	//output_enroll_course_staff(S);
 	student_enroll_course(T, S);
 	output_enroll_course_student(T);
-	wcout << "input course to remove(exit if input 0): ";
+	/*wcout << "input course to remove(exit if input 0): ";
 	wcin >> x;
 	while (x != L"0") {
-		remove_course_student(T, x);
+		remove_course_student(T,x);
 		wcout << "input course to remove(exit if input 0): ";
 		wcin >> x;
 	}
 	output_enroll_course_student(T);
-	write_student_enroll_course(T, writefile);
+	write_student_enroll_course(T, writefile);*/
 	delete_student_enroll_course(T);
 	delete_enroll_staff(S);
 	return 0;
 }
+
