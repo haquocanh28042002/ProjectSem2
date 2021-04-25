@@ -1,5 +1,5 @@
-﻿  console.cpp
-  Source.cpp
-  Generating Code...
-C:\Users\ACER\source\repos\doan\doanKTLT1\Source.cpp(26): warning C4715: 'key': not all control paths return a value
-  doanKTLT1.vcxproj -> C:\Users\ACER\source\repos\doan\x64\Debug\doanKTLT1.exe
+﻿  Source.cpp
+D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(189,18): warning C4101: 'z': unreferenced local variable
+D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(291,9): warning C4101: 't': unreferenced local variable
+D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(291,6): warning C4101: 'n': unreferenced local variable
+  doanKTLT1.vcxproj -> D:\ProjectSem2\ProjectSem2\DOANKTLT1\x64\Debug\doanKTLT1.exe

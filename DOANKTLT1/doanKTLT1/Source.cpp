@@ -313,15 +313,15 @@ int main() {
 	//output_enroll_course_staff(S);
 	student_enroll_course(T, S);
 	output_enroll_course_student(T);
-	/*wcout << "input course to remove(exit if input 0): ";
+	wcout << "input course to remove(exit if input 0): ";
 	wcin >> x;
 	while (x != L"0") {
-		remove_course_student(T,x);
+		remove_course_student(T, x);
 		wcout << "input course to remove(exit if input 0): ";
 		wcin >> x;
 	}
 	output_enroll_course_student(T);
-	write_student_enroll_course(T, writefile);*/
+	write_student_enroll_course(T, writefile);
 	delete_student_enroll_course(T);
 	delete_enroll_staff(S);
 	return 0;
