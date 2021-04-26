@@ -125,35 +125,6 @@ void View_Courses(STUDENT* T) {
 		}
 	}
 }
-/*
-void Delete_Courses_List(STUDENT*& T) {
-	if (T == nullptr) return;
-	else {
-		STUDENT* ptemp = nullptr;
-		while (T != nullptr) {
-			ptemp = T;
-		wcout << "NO" << setw(20)
-			<< "COURSENAME" << setw(20)
-			<< "TEACHERNAME" << setw(20)
-			<< "CREDIT" << setw(20)
-			<< "MAXPERSON" << setw(20)
-			<< "dayLT" << setw(20)
-			<< "DAYTH" << endl;
-		while (T != nullptr) {
-			wcout << T->no << setw(20)
-				<< T->coursename << setw(20)
-				<< T->teachername << setw(20)
-				<< T->credit << setw(20)
-				<< T->maxperson << setw(20)
-				<< T->daylt << setw(20)
-				<< T->dayth << endl;
-			T = T->pnext;
-			delete ptemp;
-			ptemp = nullptr;
-		}
-	}
-}
-*/
 
 void Delete_Student_List(STAFF*& S) {
 	if (S == nullptr) return;
@@ -249,4 +220,5 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 	file2.close();
 	file3.close();
 	file4.close();
+	file5.close();
 }
