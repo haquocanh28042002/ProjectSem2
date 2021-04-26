@@ -56,18 +56,19 @@ void View_List(STUDENT*& T) {
 	STUDENT* pcur = T;
 	else {
 		wcout   << "No" << setw(20)
-			<< "StudentID" << setw(20)
-			<< "Firstname" << setw(20)
-			<< "Lastname" << setw(20)
-			<< "Gender" << setw(20)
-			<< "DayofBirth" << endl;
+				<< "StudentID"	<< setw(20)
+				<< "Firstname"	<< setw(20)
+				<< "Lastname"	<< setw(20)
+				<< "Gender"		<< setw(20)
+				<< "DayofBirth" << endl;
+
 		while (T != nullptr) {
-			wcout << T->No << setw(20)
-				<< T->ID << setw(10)
-				<< T->firstname << setw(20)
-				<< T->lastname << setw(20)
-				<< T->gender << setw(20)
-				<< T->dateofbirth << endl;
+			wcout	<< T->No		  << setw(20)
+					<< T->ID		  << setw(10)
+					<< T->firstname   << setw(20)
+					<< T->lastname	  << setw(20)
+					<< T->gender	  << setw(20)
+					<< T->dateofbirth << endl;
 			T = T->pnext;
 		}
 	}
@@ -106,21 +107,22 @@ void Read_File_Courses(STAFF*& S, wstring filecoursesname) {
 void View_Courses(STUDENT* T) {
 	if (T == nullptr) return;
 	else {
-		wcout 	<< "NO" << setw(20) 
-			<< "COURSENAME" << setw(20) 
-			<< "TEACHERNAME" << setw(20) 
-			<< "CREDIT" << setw(20) 
-			<< "MAXPERSON" << setw(20) 
-			<< "dayLT" << setw(20) 
-			<< "DAYTH" << endl;
+		wcout 	<< "NO"			<< setw(20) 
+				<< "COURSENAME" << setw(20) 
+				<< "TEACHERNAME"<< setw(20) 
+				<< "CREDIT"		<< setw(20) 
+				<< "MAXPERSON"	<< setw(20) 
+				<< "dayLT"		<< setw(20) 
+				<< "DAYTH"		<< endl;
+
 		while (T != nullptr) {
-			wcout 	<< T->no << setw(20) 
-				<< T->coursename << setw(20) 
-				<< T->teachername << setw(20) 
-				<< T->credit << setw(20) 
-				<< T->maxperson << setw(20) 
-				<< T->daylt << setw(20) 
-				<< T->dayth << endl;
+			wcout 	<< T->no		 << setw(20) 
+					<< T->coursename << setw(20) 
+					<< T->teachername<< setw(20) 
+					<< T->credit	 << setw(20) 
+					<< T->maxperson  << setw(20) 
+					<< T->daylt		 << setw(20) 
+					<< T->dayth		 << endl;
 			T = T->pnext;
 		}
 	}
@@ -162,56 +164,56 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 			if (pcur->no == L'1') {
 				file1.open(L"Mon1.txt", std::ios_base::app);
 				file1.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file1 << pcur->No << ","
-					<< pcur->ID << ","
-					<< pcur->firstname << ","
-					<< pcur->lastname << ","
-					<< pcur->gender << ","
-					<< pcur->dateofbirth << endl;
+				file1	<< pcur->No			<< ","
+						<< pcur->ID			<< ","
+						<< pcur->firstname	<< ","
+						<< pcur->lastname	<< ","
+						<< pcur->gender		<< ","
+						<< pcur->dateofbirth<< endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L'2') {
 				file2.open(L"Mon2.txt", std::ios_base::app);
 				file2.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file2 << pcur->No << ","
-					<< pcur->ID << ","
-					<< pcur->firstname << ","
-					<< pcur->lastname << ","
-					<< pcur->gender << ","
-					<< pcur->dateofbirth << endl;
+				file2	<< pcur->No			<< ","
+						<< pcur->ID			<< ","
+						<< pcur->firstname	<< ","
+						<< pcur->lastname	<< ","
+						<< pcur->gender		<< ","
+						<< pcur->dateofbirth<< endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L'3') {
 				file3.open(L"Mon3.txt", std::ios_base::app);
 				file3.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file3 << pcur->No << ","
-					<< pcur->ID << ","
-					<< pcur->firstname << ","
-					<< pcur->lastname << ","
-					<< pcur->gender << ","
-					<< pcur->dateofbirth << endl;
+				file3	<< pcur->No			<< ","
+						<< pcur->ID			<< ","
+						<< pcur->firstname	<< ","
+						<< pcur->lastname	<< ","
+						<< pcur->gender		<< ","
+						<< pcur->dateofbirth<< endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L'4') {
 				file4.open(L"Mon4.txt", std::ios_base::app);
 				file4.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file4 << pcur->No << ","
-					<< pcur->ID << ","
-					<< pcur->firstname << ","
-					<< pcur->lastname << ","
-					<< pcur->gender << ","
-					<< pcur->dateofbirth << endl;
+				file4	<< pcur->No			<< ","
+						<< pcur->ID			<< ","
+						<< pcur->firstname  << ","
+						<< pcur->lastname	<< ","
+						<< pcur->gender		<< ","
+						<< pcur->dateofbirth<< endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L'5') {
 				file5.open(L"Mon5.txt", std::ios_base::app);
 				file5.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file5 << pcur->No << ","
-					<< pcur->ID << ","
-					<< pcur->firstname << ","
-					<< pcur->lastname << ","
-					<< pcur->gender << ","
-					<< pcur->dateofbirth << endl;
+				file5	<< pcur->No			<< ","
+						<< pcur->ID			<< ","
+						<< pcur->firstname	<< ","
+						<< pcur->lastname	<< ","
+						<< pcur->gender		<< ","
+						<< pcur->dateofbirth<< endl;
 				pcur = pcur->pnext;
 			}
 		}

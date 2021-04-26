@@ -51,7 +51,4 @@ void Delete_Student_List(STAFF*& S);
 void Delete_Courses_List(STUDENT*& T);
 void Write_Student_To_FileCourses(STUDENT*& T, wstring filename);
 
-
-
-
 #endif 
