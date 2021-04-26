@@ -218,9 +218,5 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 			}
 		}
 	}
-	file1.close();
-	file2.close();
-	file3.close();
-	file4.close();
-	file5.close();
+	file1.close(); file2.close(); file3.close(); file4.close(); file5.close();
 }
