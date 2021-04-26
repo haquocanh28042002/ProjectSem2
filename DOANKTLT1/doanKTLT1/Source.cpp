@@ -105,6 +105,7 @@ void read_file_course_staff(STAFF*& S, wstring readfile) {
 		cout << "error";
 		system("pause");
 	}
+	enroll.seekg(3);
 	STAFF* pcur = nullptr;
 	while (!enroll.eof()) {
 		if (S == nullptr) {
