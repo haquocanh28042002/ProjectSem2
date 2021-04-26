@@ -68,7 +68,7 @@ int menu(str thaotac[4], int n) {
 				break;
 			}
 			if (tt == 1) {
-				course* phead = nullptr;
+				course* phead = nullptr; 
 				inputlistcourse(phead);
 				xemlist(phead);
 				wcout << "Delete ID course: " << endl;
