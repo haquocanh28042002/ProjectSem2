@@ -1,5 +1,5 @@
 ﻿  Source.cpp
-D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(189,18): warning C4101: 'z': unreferenced local variable
-D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(291,9): warning C4101: 't': unreferenced local variable
-D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(291,6): warning C4101: 'n': unreferenced local variable
+D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(191,18): warning C4101: 'z': unreferenced local variable
+D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(298,9): warning C4101: 't': unreferenced local variable
+D:\ProjectSem2\ProjectSem2\DOANKTLT1\doanKTLT1\Source.cpp(298,6): warning C4101: 'n': unreferenced local variable
   doanKTLT1.vcxproj -> D:\ProjectSem2\ProjectSem2\DOANKTLT1\x64\Debug\doanKTLT1.exe

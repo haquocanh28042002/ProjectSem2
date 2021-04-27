@@ -167,14 +167,14 @@ void delete_student_enroll_course(STUDENT*& T) {
 	}
 }
 
-bool check_enroll_same(STUDENT* T, wstring t) {
+bool check_enroll_same(STUDENT* T, wstring m, wstring n) {
 	if (T == nullptr) return true;
 	STUDENT* pcur = T;
 	while (pcur != nullptr) {
-		if (pcur->no == t) {
+		if (pcur->daylt == m || pcur->dayth == n) {
 			return false;
 		}
-		pcur = pcur->pnext;
+		else pcur = pcur->pnext;
 	}
 	return true;
 }
@@ -184,6 +184,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 		STAFF* pcur = S;
 		STUDENT* pcur1 = nullptr;
 		wstring t, y = L"0";
+		wstring m, n;
 		output_enroll_course_staff(S);
 		wcout << "choose enroll course(exit if input 0): ";
 		wcin >> t;
@@ -193,36 +194,41 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 
 			while (pcur->no != t && pcur != nullptr)pcur = pcur->pnext;
 			if (pcur->no == t && pcur != nullptr) {
-				++count;
-				if (T == nullptr) {
-					T = new STUDENT;
-					pcur1 = T;
+				m = pcur->daylt;
+				n = pcur->dayth;
+				if (check_enroll_same(T, m, n) == false) {
+					wcout << "TRUNG" << endl;
+					output_enroll_course_staff(S);
+					wcout << "choose enroll course(exit if input 0): ";
+					wcin >> t;
 				}
 				else {
-					pcur1->pnext = new STUDENT;
-					pcur1 = pcur1->pnext;
+					++count;
+					if (T == nullptr) {
+						T = new STUDENT;
+						pcur1 = T;
+					}
+					else {
+						pcur1->pnext = new STUDENT;
+						pcur1 = pcur1->pnext;
+					}
+					pcur1->no = pcur->no;
+					pcur1->coursename = pcur->coursename;
+					pcur1->teachername = pcur->teachername;
+					pcur1->credit = pcur->credit;
+					pcur1->maxperson = pcur->maxperson;
+					pcur1->daylt = pcur->daylt;
+					pcur1->dayth = pcur->dayth;
+					pcur1->pnext = nullptr;
+					system("cls");
+					output_enroll_course_staff(S);
+					wcout << "choose enroll course(exit if input 0): ";
+					wcin >> t;
+
 				}
-				pcur1->no = pcur->no;
-				pcur1->coursename = pcur->coursename;
-				pcur1->teachername = pcur->teachername;
-				pcur1->credit = pcur->credit;
-				pcur1->maxperson = pcur->maxperson;
-				pcur1->daylt = pcur->daylt;
-				pcur1->dayth = pcur->dayth;
-				pcur1->pnext = nullptr;
+				if (count == 5)break;
+				pcur = S;
 			}
-			if (count == 5)break;
-			system("cls");
-			output_enroll_course_staff(S);
-			wcout << "choose enroll course(exit if input 0): ";
-			wcin >> t;
-			/*if (check_enroll_same(T, t) == false) {
-				cout << "trung";
-				output_enroll_course_staff(S);
-				wcout << "choose enroll course(exit if input 0): ";
-				wcin >> t;
-			}*/
-			pcur = S;
 		}
 	}
 }
@@ -287,7 +293,7 @@ int main() {
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
 	STUDENT K[N], * T = nullptr;
 	STAFF F, * S = nullptr;
-	wstring filestudent = L"input.txt";
+	wstring filestudent = L"input.csv";
 	wstring x;
 	int n, t;
 	/*wcout << "1)staff" << endl;
