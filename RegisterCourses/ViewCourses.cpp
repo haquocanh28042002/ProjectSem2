@@ -161,7 +161,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 		STUDENT* pcur = nullptr;
 		pcur = T;
 		while (pcur != nullptr) {
-			if (pcur->no == L'1') {
+			if (pcur->no == L"1") {
 				file1.open(L"Mon1.txt", std::ios_base::app);
 				file1.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file1	<< pcur->No		<< ","
@@ -172,7 +172,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'2') {
+			if (pcur->no == L"2") {
 				file2.open(L"Mon2.txt", std::ios_base::app);
 				file2.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file2	<< pcur->No		<< ","
@@ -183,7 +183,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'3') {
+			if (pcur->no == L"3") {
 				file3.open(L"Mon3.txt", std::ios_base::app);
 				file3.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file3	<< pcur->No		<< ","
@@ -194,7 +194,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'4') {
+			if (pcur->no == L"4") {
 				file4.open(L"Mon4.txt", std::ios_base::app);
 				file4.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file4	<< pcur->No		<< ","
@@ -205,7 +205,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'5') {
+			if (pcur->no == L"5") {
 				file5.open(L"Mon5.txt", std::ios_base::app);
 				file5.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file5	<< pcur->No		<< ","
