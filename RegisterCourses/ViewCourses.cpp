@@ -10,7 +10,7 @@ void SetMode() {
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
 }
 
-void Read_Student_List(STAFF*& S, wstring filename) {
+void Read_Student_List(STUDENT*& T, wstring filename) {
 	wifstream filelist;
 	filelist.open(filename, ios_base::in);
 	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
@@ -19,17 +19,17 @@ void Read_Student_List(STAFF*& S, wstring filename) {
 		system("pause");
 	}
 	else {
-		S = new STAFF;
-		STAFF* pcur = S;
+		T = new STUDENT;
+		STUDENT* pcur = T;
 		wstring No; wstring ID;
 		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
 		while (!filelist.eof()) {
-			if (phead == nullptr) {
-				phead = new node;
-				pcur = phead;
+			if (T == nullptr) {
+				T = new STUDENT;
+				pcur = T;
 			}
 			else {
-				pcur->pnext = new node;
+				pcur->pnext = new STUDENT;
 				pcur = pcur->pnext;
 				pcur->pnext = nullptr;
 			}
@@ -37,7 +37,7 @@ void Read_Student_List(STAFF*& S, wstring filename) {
 			getline(filelist, ID, L',');
 			getline(filelist, firstname, L',');
 			getline(filelist, lastname, L',');
-			getline(student, gender, L',');
+			getline(filelist, gender, L',');
 
 			pcur->No = No;
 			pcur->ID = ID;
@@ -53,8 +53,8 @@ void Read_Student_List(STAFF*& S, wstring filename) {
 
 void View_List(STUDENT*& T) {
 	if (T == nullptr) return;
-	STUDENT* pcur = T;
 	else {
+		STUDENT* pcur = T;
 		wcout   << "No" 	<< setw(20)
 			<< "StudentID"	<< setw(20)
 			<< "Firstname"	<< setw(20)
