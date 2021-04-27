@@ -197,7 +197,8 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 				m = pcur->daylt;
 				n = pcur->dayth;
 				if (check_enroll_same(T, m, n) == false) {
-					wcout << "TRUNG" << endl;
+
+					wcout << "similar time" << endl;
 					output_enroll_course_staff(S);
 					wcout << "choose enroll course(exit if input 0): ";
 					wcin >> t;
