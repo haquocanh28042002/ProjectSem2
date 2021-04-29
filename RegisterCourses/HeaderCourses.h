@@ -22,7 +22,7 @@ struct STUDENT {
 	wstring no, coursename, teachername, credit, maxperson, daylt, dayth;
 	wstring No, ID, socialID;
 	wstring firstname, lastname, gender, dateofbirth;
-	wstring totalmark, midtermmark, finalmark, orthermark,
+	wstring totalmark, midtermmark, finalmark, orthermark;
 	STUDENT* pnext;
 };
 

@@ -10,7 +10,7 @@ void SetMode() {
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
 }
 
-void Read_Student_List(STAFF*& S, wstring filename) {
+void Read_Student_List(STUDENT*& T, wstring filename) {
 	wifstream filelist;
 	filelist.open(filename, ios_base::in);
 	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
@@ -19,17 +19,17 @@ void Read_Student_List(STAFF*& S, wstring filename) {
 		system("pause");
 	}
 	else {
-		S = new STAFF;
-		STAFF* pcur = S;
+		T = new STUDENT;
+		STUDENT* pcur = T;
 		wstring No; wstring ID;
 		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
 		while (!filelist.eof()) {
-			if (phead == nullptr) {
-				phead = new node;
-				pcur = phead;
+			if (T == nullptr) {
+				T = new STUDENT;
+				pcur = T;
 			}
 			else {
-				pcur->pnext = new node;
+				pcur->pnext = new STUDENT;
 				pcur = pcur->pnext;
 				pcur->pnext = nullptr;
 			}
@@ -37,7 +37,7 @@ void Read_Student_List(STAFF*& S, wstring filename) {
 			getline(filelist, ID, L',');
 			getline(filelist, firstname, L',');
 			getline(filelist, lastname, L',');
-			getline(student, gender, L',');
+			getline(filelist, gender, L',');
 
 			pcur->No = No;
 			pcur->ID = ID;
@@ -53,8 +53,8 @@ void Read_Student_List(STAFF*& S, wstring filename) {
 
 void View_List(STUDENT*& T) {
 	if (T == nullptr) return;
-	STUDENT* pcur = T;
 	else {
+		STUDENT* pcur = T;
 		wcout   << "No" 	<< setw(20)
 			<< "StudentID"	<< setw(20)
 			<< "Firstname"	<< setw(20)
@@ -161,7 +161,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 		STUDENT* pcur = nullptr;
 		pcur = T;
 		while (pcur != nullptr) {
-			if (pcur->no == L'1') {
+			if (pcur->no == L"1") {
 				file1.open(L"Mon1.txt", std::ios_base::app);
 				file1.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file1	<< pcur->No		<< ","
@@ -172,7 +172,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'2') {
+			if (pcur->no == L"2") {
 				file2.open(L"Mon2.txt", std::ios_base::app);
 				file2.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file2	<< pcur->No		<< ","
@@ -183,7 +183,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'3') {
+			if (pcur->no == L"3") {
 				file3.open(L"Mon3.txt", std::ios_base::app);
 				file3.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file3	<< pcur->No		<< ","
@@ -194,7 +194,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'4') {
+			if (pcur->no == L"4") {
 				file4.open(L"Mon4.txt", std::ios_base::app);
 				file4.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file4	<< pcur->No		<< ","
@@ -205,7 +205,7 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 					<< pcur->dateofbirth	<< endl;
 				pcur = pcur->pnext;
 			}
-			if (pcur->no == L'5') {
+			if (pcur->no == L"5") {
 				file5.open(L"Mon5.txt", std::ios_base::app);
 				file5.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file5	<< pcur->No		<< ","
