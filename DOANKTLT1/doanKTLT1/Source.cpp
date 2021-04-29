@@ -16,6 +16,7 @@ struct STUDENT
 	wstring passwordstudent;
 	wstring passwordnewstudent;
 	wstring no, coursename, teachername, credit, maxperson, daylt, dayth;
+	wstring count;
 	STUDENT* pnext;
 };
 struct STAFF
@@ -197,7 +198,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 				m = pcur->daylt;
 				n = pcur->dayth;
 				if (check_enroll_same(T, m, n) == false) {
-
+					system("cls");
 					wcout << "similar time" << endl;
 					output_enroll_course_staff(S);
 					wcout << "choose enroll course(exit if input 0): ";
@@ -220,12 +221,19 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 					pcur1->maxperson = pcur->maxperson;
 					pcur1->daylt = pcur->daylt;
 					pcur1->dayth = pcur->dayth;
+					pcur1->count = count;
 					pcur1->pnext = nullptr;
 					system("cls");
 					output_enroll_course_staff(S);
 					wcout << "choose enroll course(exit if input 0): ";
 					wcin >> t;
 
+				}
+				if (pcur1->count >= pcur1->maxperson) {
+					cout << "maxperson is full " << endl;
+					output_enroll_course_staff(S);
+					wcout << "choose enroll course(exit if input 0): ";
+					wcin >> t;
 				}
 				if (count == 5)break;
 				pcur = S;
