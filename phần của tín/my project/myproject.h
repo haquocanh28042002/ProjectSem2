@@ -17,10 +17,15 @@ struct node
 	wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
 	wstring totalmark; wstring midtermmark;
 	wstring finalmark; wstring orthermark;
+	wstring averagemark;
+	wstring gpa;
+	wstring course;
 	node* pnext;
 };
 
-
+void scorecourse(node* phead1);
+//void view_score_course_of_student(node* phead, node* phead1);
+void read_course(wstring classx, node*& phead1);
 void addnewstudent(wstring classx, node* phead);
 void inputstudentscore(wstring classx, node*& phead);
 void liststudent(node* phead);

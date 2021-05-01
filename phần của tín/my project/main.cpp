@@ -3,10 +3,11 @@ void menu()
 {
     node* phead = nullptr;
     node* phead1 = nullptr;
-    wstring class1 = L"inputstudentscore.txt";
+    wstring class1 = L"inputstudentscore.csv";
     wstring class2 = L"inputstudentscore2.txt";
     wstring class3 = L"inputstudentscore3.txt";
     wstring class4 = L"inputstudentscore4.txt";
+    wstring course = L"inputcourse.txt";
     int a = 2021; int b = 2024;
     wcout << "\nschool year: " << a << "-" << b << endl;
    switch (a)
@@ -21,7 +22,8 @@ void menu()
     while (n != 0)
     {
         wcout << "\n1. Class  ";
-        wcout << "\n2. Score ";
+        wcout << "\n2. scoreboard of the course ";
+        wcout << "\n3. Scoreboard of the class ";
         wcout << "\n0. cancel \n";
         wcin >> n;
         system("cls");
@@ -49,7 +51,6 @@ void menu()
                     wcout << "\nyou want to add new student ";
                     wcout << "\n1.Yes ";
                     wcout << "\n0.No \n";
-
                     wcin >> t2;
                     system("cls");
                     while (t2 != 0)
@@ -211,6 +212,59 @@ void menu()
                 {
                 case 1:
                 {
+                   
+                    break;
+                }
+                case 2:
+                {
+                   
+                    break;
+                }
+                case 3:
+                {
+                    
+                    break;
+                }
+                case 4:
+                {
+                   
+                    break;
+                }
+                case 0: break;
+                }
+                if (t1 != 0)
+                {
+                    wcout << "\n Continue view ";
+                    wcout << "\n1. Class 20CLC1 ";
+                    wcout << "\n2. Class 20CLC2 ";
+                    wcout << "\n3. Class 20CLC3 ";
+                    wcout << "\n4. Class 20CLC4 ";
+                    wcout << "\n0. Back\n ";
+                    wcin >> t1;
+                    system("cls");
+                }
+
+                deletelist(phead);
+            }
+            break;
+
+        }
+        case 3:
+        {
+            wcout << "\n1. Class 20CLC1 ";
+            wcout << "\n2. Class 20CLC2 ";
+            wcout << "\n3. Class 20CLC3 ";
+            wcout << "\n4. Class 20CLC4 ";
+            wcout << "\n0. Back \n";
+            int t1;
+            wcin >> t1;
+            system("cls");
+            while (t1 != 0)
+            {
+                switch (t1)
+                {
+                case 1:
+                {
                     inputstudentscore(class1, phead);
                     liststudentwithscore(phead);
                     break;
@@ -265,6 +319,13 @@ void main()
     GetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
     memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
     SetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
-    menu();
-    system("pause");
+     menu();
+   /* node* phead = nullptr;
+    node* phead1 = nullptr;
+    wstring s = L"inputcourse.csv";
+    wstring class1 = L"inputstudentscore.txt";
+    inputstudentscore(class1,phead);
+    read_course(s, phead1);*/
+
+    
 }
