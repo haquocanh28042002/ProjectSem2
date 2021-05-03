@@ -24,7 +24,6 @@ struct node
 };
 
 void scorecourse(node* phead1);
-//void view_score_course_of_student(node* phead, node* phead1);
 void read_course(wstring classx, node*& phead1);
 void addnewstudent(wstring classx, node* phead);
 void inputstudentscore(wstring classx, node*& phead);

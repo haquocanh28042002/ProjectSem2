@@ -2,7 +2,7 @@
 
 void liststudent(node* phead)
 {
-	wcout << endl << "No" << setw(20) << "StudentID" << setw(20) << "Firstname"  << setw(20) <<"Lastname" << setw(20) << "Gender" << setw(20) << "DayofBirth" << setw(20) << "SocialID" << endl;
+	wcout  << "No" << setw(20) << "StudentID" << setw(20) << "Firstname"  << setw(20) <<"Lastname" << setw(20) << "Gender" << setw(20) << "DayofBirth" << setw(20) << "SocialID" << endl;
 	while (phead != nullptr)
 	{
 		wcout << phead->No << setw(20) << phead->ID << setw(20) << phead->firstname << setw(20) << phead->lastname << setw(20) << phead->gender << setw(20) << phead->dateofbirth << setw(20) << phead->socialID;
@@ -17,7 +17,7 @@ void addnewstudent(wstring classx, node* phead)
 	wstring ID; wstring socialID;
 	wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
 	node* pcur = phead;
-	int t = 1;
+	int t = 0;
 	while (pcur->pnext != nullptr)
 	{
 		pcur = pcur->pnext;
@@ -26,7 +26,6 @@ void addnewstudent(wstring classx, node* phead)
 	No = to_wstring(t + 1);
 	pcur->pnext = new node;
 	pcur = pcur->pnext;
-	node* pcur2 = pcur;
 	wcout << "\n the first name: ";
 	getline(wcin, firstname);
 	wcout << "\n the last name: ";
@@ -51,8 +50,8 @@ void addnewstudent(wstring classx, node* phead)
 	wofstream student;
 	student.open(classx, ios::out | ios::app);
 	student.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	student << pcur->No << s << pcur->ID << s << pcur->firstname << s << pcur->lastname << s << pcur->gender << s << pcur->dateofbirth << s << pcur ->socialID;
 	student << endl;
-	student << pcur->No << s << pcur->ID << s << pcur->firstname << s << pcur->lastname << s << pcur->gender << s << pcur->dateofbirth << s << pcur->socialID;
 	student.close();
 }
 void deletelist(node*& phead)
@@ -90,8 +89,7 @@ void inputstudentscore(wstring classx, node*& phead)
 				pcur = pcur->pnext;
 				
 			}
-			getline(student, pcur->No, L',');
-			//wcin.ignore();
+			getline(student, pcur->No, L',');			
 			getline(student, pcur->ID, L',');
 			getline(student, pcur->firstname, L',');
 			getline(student, pcur->lastname, L',');
