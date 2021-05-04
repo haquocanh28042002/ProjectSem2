@@ -1,12 +1,11 @@
 #include"myproject.h"
-//school year
 
 void liststudent(node* phead)
 {
-	wcout << endl << "No" << setw(20) << "Firstname" << setw(20) << "Lastname" << setw(20) << "StudentID" << setw(20) << "Gender" << setw(20) << "DayofBirth" << setw(20) << "SocialID" << endl;
+	wcout  << "No" << setw(20) << "StudentID" << setw(20) << "Firstname"  << setw(20) <<"Lastname" << setw(20) << "Gender" << setw(20) << "DayofBirth" << setw(20) << "SocialID" << endl;
 	while (phead != nullptr)
 	{
-		wcout << phead->No << setw(20) << phead->firstname << setw(20) << phead->lastname << setw(20) << phead->ID << setw(20) << phead->gender << setw(20) << phead->dateofbirth << setw(20) << phead->socialID;
+		wcout << phead->No << setw(20) << phead->ID << setw(20) << phead->firstname << setw(20) << phead->lastname << setw(20) << phead->gender << setw(20) << phead->dateofbirth << setw(20) << phead->socialID;
 		wcout << endl;
 		phead = phead->pnext;
 	}
@@ -18,7 +17,7 @@ void addnewstudent(wstring classx, node* phead)
 	wstring ID; wstring socialID;
 	wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
 	node* pcur = phead;
-	int t = 1;
+	int t = 0;
 	while (pcur->pnext != nullptr)
 	{
 		pcur = pcur->pnext;
@@ -27,19 +26,17 @@ void addnewstudent(wstring classx, node* phead)
 	No = to_wstring(t + 1);
 	pcur->pnext = new node;
 	pcur = pcur->pnext;
-	//	wcout << "No ";
-		//getline(wcin, No);
-	wcout << "\n the first name ";
+	wcout << "\n the first name: ";
 	getline(wcin, firstname);
-	wcout << "\n the last name ";
+	wcout << "\n the last name: ";
 	getline(wcin, lastname);
-	wcout << "\n ID ";
+	wcout << "\n ID: ";
 	getline(wcin, ID);
 	wcout << "\n gender: ";
 	getline(wcin, gender);
-	wcout << "\ndate of birth ";
+	wcout << "\ndate of birth: ";
 	getline(wcin, dateofbirth);
-	wcout << "\n the social ID  ";
+	wcout << "\n the social ID:  ";
 	getline(wcin, socialID);
 	pcur->No = No;
 	pcur->firstname = firstname;
@@ -53,9 +50,8 @@ void addnewstudent(wstring classx, node* phead)
 	wofstream student;
 	student.open(classx, ios::out | ios::app);
 	student.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	student << pcur->No << s << pcur->ID << s << pcur->firstname << s << pcur->lastname << s << pcur->gender << s << pcur->dateofbirth << s << pcur ->socialID;
 	student << endl;
-	student << pcur->No << s << pcur->firstname << s << pcur->lastname << s << pcur->ID << s << pcur->gender << s << pcur->dateofbirth << s << pcur->socialID;
-
 	student.close();
 }
 void deletelist(node*& phead)
@@ -73,18 +69,13 @@ void inputstudentscore(wstring classx, node*& phead)
 	wifstream student;
 	student.open(classx, ios::in);
 	student.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	student.seekg(3);
 	if (student.fail() == true)
 	{
 		wcout << "can't open file\n";
-		return;
-	}
-	else
-	{
+		system("pause");
+	}	
 		node* pcur = nullptr;
-	/*	wstring No; wstring ID; wstring socialID;
-		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
-		wstring totalmark; wstring midtermmark;
-		wstring finalmark; wstring orthermark;*/
 		while (!student.eof())
 		{
 			if (phead == nullptr)
@@ -96,83 +87,86 @@ void inputstudentscore(wstring classx, node*& phead)
 			{
 				pcur->pnext = new node;
 				pcur = pcur->pnext;
-				pcur->pnext = nullptr;
+				
 			}
-			getline(student, pcur->No, L',');
-			getline(student, pcur->firstname, L',');
-			getline(student,pcur->lastname, L',');
+			getline(student, pcur->No, L',');			
 			getline(student, pcur->ID, L',');
+			getline(student, pcur->firstname, L',');
+			getline(student, pcur->lastname, L',');
 			getline(student, pcur->gender, L',');
-			getline(student,pcur->dateofbirth, L',');
+			getline(student, pcur->dateofbirth, L',');
 			getline(student, pcur->socialID, L',');
-			getline(student,pcur->midtermmark, L',');
-			//wcin.ignore();
-			getline(student, pcur->finalmark, L',');
-			getline(student, pcur->orthermark, L',');
-			getline(student,pcur->totalmark);
+			getline(student, pcur->averagemark, L',');
+			getline(student, pcur->gpa);
 			pcur->pnext = nullptr;
-
 		}
-	}
 	student.close();
 }
 void liststudentwithscore(node* phead)
 {
-	wcout << "No" << setw(20) << "Firstname" << setw(20) << "Lastname" << setw(20) << "StudentID" << setw(20) << "Gender" << setw(20) << "DayofBirth" << setw(20) << "SocialID" << setw(20) << "Midtermmark" << setw(20) << "Finalmark" << setw(20) << "orthermark" << setw(20) << "Totalmark" << endl;
-	node* pcur = phead;
-	while (pcur != nullptr)
+	wcout<<endl << "No" << setw(20) << "StudentID" << setw(20) << "Firstname" << setw(20) << "Lastname" << setw(20) << "Average mark"<<setw(20)<<"GPA"<< endl;
+	while (phead != nullptr)
 	{
-		wcout << pcur->No << setw(20) << pcur->firstname << setw(20) << pcur->lastname << setw(20) << pcur->ID << setw(20) << pcur->gender << setw(20) << pcur->dateofbirth << setw(20) << pcur->socialID << setw(20) << pcur->midtermmark << setw(20) << pcur->finalmark << setw(20) << pcur->orthermark << setw(20) << pcur->totalmark;
+		wcout << phead->No << setw(20) << phead->ID << setw(20) << phead->firstname << setw(20) << phead->lastname << setw(20) << phead->averagemark << setw(20) << phead->gpa;
 		wcout << endl;
-		pcur = pcur->pnext;
-	}
-}
-/*void import(wstring classx, node*& phead)
-{
-	if (phead == nullptr)return;
-	wofstream student;
-	student.open(classx, ios::out);
-	while (phead != nullptr)
-	{
-		student << phead->No << "," << phead->firstname << "," << phead->lastname << "," << phead->ID << "," << phead->gender << "," << phead->dateofbirth << "," << phead->socialID << endl;
 		phead = phead->pnext;
 	}
-	student.close();
 }
-void importscoreboard(wstring classx,node*& phead)
+void read_course(wstring classx,node*& phead1)
 {
-	if (phead == nullptr)return;
-	wofstream student;
-	student.open(classx,ios::out);
-	while (phead != nullptr)
+	wifstream student;
+	student.open(classx, ios::in);
+	student.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+	student.seekg(3);
+	if (student.fail() == true)
 	{
-		student << phead->No << "," << phead->firstname << "," << phead->lastname << "," << phead->ID << "," << phead->gender << "," << phead->dateofbirth << "," << phead->socialID << endl;
-		phead = phead->pnext;
+		wcout << "can't open file\n";
+		return;
+	}
+	else
+	{
+		node* pcur1 = nullptr;
+		while (!student.eof())
+		{
+			if (phead1 == nullptr)
+			{
+				phead1 = new node;
+				pcur1 = phead1;
+			}
+			else
+			{
+				pcur1->pnext = new node;
+				pcur1 = pcur1->pnext;
+				pcur1->pnext = nullptr;
+			}
+			//getline(student, pcur1->course, L',');
+			getline(student, pcur1->No, L',');
+			getline(student, pcur1->ID, L',');
+			getline(student, pcur1->firstname, L',');
+			getline(student, pcur1->lastname, L',');
+			getline(student, pcur1->midtermmark, L',');			
+			getline(student, pcur1->finalmark, L',');
+			getline(student, pcur1->orthermark, L',');
+			getline(student, pcur1->totalmark);
+			//wcin.ignore();
+			pcur1->pnext = nullptr;
+		}
 	}
 	student.close();
+	scorecourse(phead1);
 }
-void addscoreofnewstudet(wstring classx, node* phead)
+void scorecourse(node* phead1)
 {
-	if (phead == nullptr) return;
-	node* pcur = phead;
-	wcout << "\nscore of new student \n";
-	while (pcur->pnext != nullptr)
+	if (phead1 == nullptr) return;
+	wcout << endl << "No" << setw(20) << "StudentID" << setw(20) << "Firstname" << setw(20) << "Lastname"  <<setw(20)<< "Midtermmark" << setw(20) << "Finalmark" << setw(20) << "orthermark" << setw(20) << "Totalmark" << endl;
+	//node* pcur1 = phead1;
+	while (phead1 != nullptr)
 	{
-		pcur = pcur->pnext;
+		wcout << phead1->No << setw(20) << phead1->ID << setw(20) << phead1->firstname << setw(20) << phead1->lastname  <<setw(20) << phead1->midtermmark << setw(20) << phead1->finalmark << setw(20) << phead1->orthermark << setw(20) << phead1->totalmark;
+		wcout << endl;
+		phead1 = phead1->pnext;
 	}
-	wcin.ignore();
-	wcout << "\nmidterm score: ";
-	getline(wcin, pcur->midtermmark);
-	wcout << "\n final score: ";
-	getline(wcin, pcur->firstname);
-	wcout << "\norther score: ";
-	getline(wcin, pcur->orthermark);
-	wcout << "\ntotal score: ";
-	getline(wcin, pcur->totalmark);
-	wofstream student;
-	student.open(classx, ios::out);
-	while (pcur->pnext != nullptr) pcur = pcur->pnext;
-	student << pcur->midtermmark << "," << pcur->finalmark << "," << pcur->orthermark << "," << pcur->totalmark << endl;
+}
 
-	student.close();
-}*/
+
+
