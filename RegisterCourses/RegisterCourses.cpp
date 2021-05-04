@@ -5,7 +5,10 @@
 #include "HeaderCourses.h"
 
 int main() {
-
+	STUDENT* T = nullptr;
+	SetMode;
+	Read_Student_List(T, );
+	View_List(T);
 	return 0;
 }
 

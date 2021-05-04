@@ -43,12 +43,12 @@ struct node
 };
 
 void SetMode();
-void Read_Student_List(STAFF*& S, wstring filename);
-void View_List(STAFF*& S);
+void Read_Student_List(STUDENT*& T, wstring filename);
+void View_List(STUDENT*& T);
 void Read_File_Courses(STAFF*& S, wstring filecoursesname);
 void View_Courses(STUDENT* T);
 void Delete_Student_List(STAFF*& S);
 void Delete_Courses_List(STUDENT*& T);
-void Write_Student_To_FileCourses(STUDENT*& T, wstring filename);
+void Write_Student_To_FileCourses(STUDENT*& T);
 
 #endif 
