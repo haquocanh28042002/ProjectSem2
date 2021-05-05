@@ -11,7 +11,7 @@ void SetMode() {
 }
 
 void Read_Student_List(STUDENT*& T, wstring filename) {
-	wifstream filelist;
+	wofstream filelist;
 	filelist.open(filename, ios_base::in);
 	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filelist.fail() == true) {
@@ -75,7 +75,7 @@ void View_List(STUDENT*& T) {
 }
 
 void Read_File_Courses(STAFF*& S, wstring filecoursesname) {
-	wifstream filecourses;
+	wofstream filecourses;
 	filecourses.open(filecoursesname, ios_base::in);
 	filecourses.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filecourses.fail() == true) {
