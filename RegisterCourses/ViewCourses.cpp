@@ -11,7 +11,7 @@ void SetMode() {
 }
 
 void Read_Student_List(STUDENT*& T, wstring filename) {
-	wifstream filelist;
+	wofstream filelist;
 	filelist.open(filename, ios_base::in);
 	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filelist.fail() == true) {
@@ -75,7 +75,7 @@ void View_List(STUDENT*& T) {
 }
 
 void Read_File_Courses(STAFF*& S, wstring filecoursesname) {
-	wifstream filecourses;
+	wofstream filecourses;
 	filecourses.open(filecoursesname, ios_base::in);
 	filecourses.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filecourses.fail() == true) {
@@ -162,58 +162,33 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 		pcur = T;
 		while (pcur != nullptr) {
 			if (pcur->no == L"1") {
-				file1.open(L"Mon1.txt", std::ios_base::app);
+				file1.open(L"Mon1.csv", std::ios_base::app);
 				file1.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file1	<< pcur->No		<< ","
-					<< pcur->ID		<< ","
-					<< pcur->firstname	<< ","
-					<< pcur->lastname	<< ","
-					<< pcur->gender		<< ","
-					<< pcur->dateofbirth	<< endl;
+				file1 << pcur->No << L"," << pcur->ID << L"," << pcur->firstname << L"," << pcur->lastname << L"," << pcur->gender << L","<< pcur->dateofbirth << endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L"2") {
-				file2.open(L"Mon2.txt", std::ios_base::app);
+				file2.open(L"Mon2.csv", std::ios_base::app);
 				file2.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file2	<< pcur->No		<< ","
-					<< pcur->ID		<< ","
-					<< pcur->firstname	<< ","
-					<< pcur->lastname	<< ","
-					<< pcur->gender		<< ","
-					<< pcur->dateofbirth	<< endl;
+				file2 << pcur->No << L"," << pcur->ID << L"," << pcur->firstname << L"," << pcur->lastname << L"," << pcur->gender << L","<< pcur->dateofbirth << endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L"3") {
-				file3.open(L"Mon3.txt", std::ios_base::app);
+				file3.open(L"Mon3.csv", std::ios_base::app);
 				file3.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file3	<< pcur->No		<< ","
-					<< pcur->ID		<< ","
-					<< pcur->firstname	<< ","
-					<< pcur->lastname	<< ","
-					<< pcur->gender		<< ","
-					<< pcur->dateofbirth	<< endl;
+				file3 << pcur->No << L"," << pcur->ID << L"," << pcur->firstname << L"," << pcur->lastname << L"," << pcur->gender << L","<< pcur->dateofbirth << endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L"4") {
-				file4.open(L"Mon4.txt", std::ios_base::app);
+				file4.open(L"Mon4.csv", std::ios_base::app);
 				file4.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file4	<< pcur->No		<< ","
-					<< pcur->ID		<< ","
-					<< pcur->firstname  	<< ","
-					<< pcur->lastname	<< ","
-					<< pcur->gender		<< ","
-					<< pcur->dateofbirth	<< endl;
+				file4 << pcur->No << L"," << pcur->ID << L"," << pcur->firstname << L"," << pcur->lastname << L"," << pcur->gender << L","<< pcur->dateofbirth << endl;
 				pcur = pcur->pnext;
 			}
 			if (pcur->no == L"5") {
-				file5.open(L"Mon5.txt", std::ios_base::app);
+				file5.open(L"Mon5.csv", std::ios_base::app);
 				file5.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
-				file5	<< pcur->No		<< ","
-					<< pcur->ID		<< ","
-					<< pcur->firstname	<< ","
-					<< pcur->lastname	<< ","
-					<< pcur->gender		<< ","
-					<< pcur->dateofbirth	<< endl;
+				file5 << pcur->No << L"," << pcur->ID << L"," << pcur->firstname << L"," << pcur->lastname << L"," << pcur->gender << L","<< pcur->dateofbirth << endl;
 				pcur = pcur->pnext;
 			}
 		}
