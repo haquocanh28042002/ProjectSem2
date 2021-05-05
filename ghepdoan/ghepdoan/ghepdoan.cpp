@@ -28,24 +28,24 @@ int main() {
 	case 2: {
 		input_student(K, n, filestudent);
 		login_student(K, n);
+		wstring readfile = L"enrollstaff.csv", writefile = L"writestudentenrollcourse.csv";
+		read_file_course_staff(S, readfile);
+		//output_enroll_course_staff(S);
+		student_enroll_course(T, S);
+		output_enroll_course_student(T);
+		wcout << "input course to remove(exit if input 0): ";
+		wcin >> x;
+		while (x != L"0") {
+			remove_course_student(T, x);
+			wcout << "input course to remove(exit if input 0): ";
+			wcin >> x;
+		}
+		output_enroll_course_student(T);
+		write_student_enroll_course(T, writefile);
 		break;
 	}
 
 	}
-	wstring readfile = L"enrollstaff.csv", writefile = L"writestudentenrollcourse.csv";
-	read_file_course_staff(S, readfile);
-	//output_enroll_course_staff(S);
-	student_enroll_course(T, S);
-	output_enroll_course_student(T);
-	wcout << "input course to remove(exit if input 0): ";
-	wcin >> x;
-	while (x != L"0") {
-		remove_course_student(T, x);
-		wcout << "input course to remove(exit if input 0): ";
-		wcin >> x;
-	}
-	output_enroll_course_student(T);
-	write_student_enroll_course(T, writefile);
 	delete_student_enroll_course(T);
 	delete_enroll_staff(S);
 	return 0;
