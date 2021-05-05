@@ -9,7 +9,7 @@ using namespace std;
 
 typedef char str[31];
 str thaotac[4] = { "1.Add new","2.Delete","3.List","0.Exit" };
-enum TRANGTHAI { UP, DOWN, LEFT, RIGHT, ENTER, BACK };
+enum TRANGTHAI { UP, DOWN, LEFT, RIGHT, ENTER };
 TRANGTHAI key(int z) {
 	if (z == 224) {
 		char c;
@@ -88,6 +88,7 @@ int menu(str thaotac[4], int n) {
 				xemlist(phead);
 				wcout << "0. Back ";
 				wcin >> tmp;
+				wcin.ignore();
 				if (tmp == 0) { menu(thaotac, 4); }
 				break;
 			}
