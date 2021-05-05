@@ -141,19 +141,6 @@ void Delete_Student_List(STAFF*& S) {
 	}
 }
 
-void Delete_List(STUDENT*& T) {
-	if (T == nullptr) return;
-	else {
-		STUDENT* ptemp = nullptr;
-		while (T != nullptr) {
-			ptemp = T;
-			T = T->pnext;
-			delete ptemp;
-			ptemp = nullptr;
-		}
-	}
-}
-
 void Delete_Courses_List(STUDENT*& T) {
 	if (T == nullptr) return;
 	else {
