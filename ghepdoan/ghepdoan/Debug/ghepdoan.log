@@ -1,0 +1,5 @@
+﻿  function.cpp
+C:\Users\ACER\source\repos\ghepdoan\ghepdoan\function.cpp(165,30): warning C4101: 'z': unreferenced local variable
+  ghepdoan.cpp
+  Generating Code...
+  ghepdoan.vcxproj -> C:\Users\ACER\source\repos\ghepdoan\Debug\ghepdoan.exe

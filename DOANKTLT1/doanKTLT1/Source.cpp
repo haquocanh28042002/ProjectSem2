@@ -189,7 +189,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 		output_enroll_course_staff(S);
 		wcout << "choose enroll course(exit if input 0): ";
 		wcin >> t;
-		int count = 0, z;
+		int count = 0, count1 = 0, z;
 
 		while (t != y) {
 
@@ -221,7 +221,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 					pcur1->maxperson = pcur->maxperson;
 					pcur1->daylt = pcur->daylt;
 					pcur1->dayth = pcur->dayth;
-					pcur1->count = count;
+					pcur1->count = count1 + 1;
 					pcur1->pnext = nullptr;
 					system("cls");
 					output_enroll_course_staff(S);
@@ -237,6 +237,7 @@ void student_enroll_course(STUDENT*& T, STAFF* S) {
 				}
 				if (count == 5)break;
 				pcur = S;
+				count1 = 0;
 			}
 		}
 	}
