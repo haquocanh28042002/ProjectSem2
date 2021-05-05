@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <io.h>
 #include<sstream>
 #include <fcntl.h>
@@ -35,7 +35,7 @@ void deletecourse(course*& phead, wstring t);
 void outputlistcourse(course* phead);
 void inputlistcourse(course* &phead) {
 	wfstream f;
-	f.open("course.csv", ios::in);
+	f.open(L"course.csv", ios_base::in);
 	f.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	course* pcur = nullptr;
 	wstring IDcourse, namecourse, teacher;
@@ -50,6 +50,7 @@ void inputlistcourse(course* &phead) {
 	getline(f, pcur->s1, L',');
 	getline(f, pcur->dow2, L',');
 	getline(f, pcur->s2);
+	phead->pNext = nullptr;
 	while (!f.eof()) {
 		pcur->pNext = new course;
 		pcur = pcur->pNext;
@@ -76,7 +77,7 @@ void xemlist(course* phead) {
 		wcout << pcur->dow1 << " ";
 		wcout << pcur->s1 << " ";
 		wcout << pcur->dow2 << " ";
-		wcout << pcur->s2 << " " << endl;
+		wcout << pcur->s2 << endl;
 		pcur = pcur->pNext;
 	}
 	return;
@@ -92,9 +93,16 @@ void deletecourse(course*& phead, wstring t) {
 	}
 	while (pcur->pNext != nullptr) {
 		if (pcur->pNext->IDcourse == t) {
+			course* tmp = pcur->pNext;
 			pcur->pNext = pcur->pNext->pNext;
+			delete tmp;
+			tmp = nullptr;
 		}
-		if (pcur->pNext == nullptr) return;
+		if (pcur->pNext == nullptr) {
+			course* tmp = pcur->pNext;
+			delete tmp;
+			tmp = nullptr;
+		}
 		else 
 			pcur = pcur->pNext;
 	}
@@ -118,7 +126,7 @@ void outputlistcourse(course* phead) {
 }
 void addnewcourse(){
 	wfstream f;
-	course* a=nullptr;
+	course* a = nullptr;
 	a = new course;
 	a->pNext = nullptr;
 	f.open("course.csv", ios::app);
