@@ -87,7 +87,6 @@ void inputstudentscore(wstring classx, node*& phead)
 			{
 				pcur->pnext = new node;
 				pcur = pcur->pnext;
-				
 			}
 			getline(student, pcur->No, L',');			
 			getline(student, pcur->ID, L',');
