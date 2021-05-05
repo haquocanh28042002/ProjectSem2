@@ -153,7 +153,7 @@ void addnewcourse(){
 
 	wcout << "S1/S2/S3/S4: ";
 	getline(std::wcin, a->s2);
-	f << a->s2 << ","<< endl;
+	f << a->s2 << endl;
 	 
 	delete a;
 }
