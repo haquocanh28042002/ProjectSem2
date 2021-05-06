@@ -67,12 +67,11 @@ void inputlistcourse(course* &phead) {
 	f.close();
 }
 void xemlist(course* phead) {
-	clrscr();
-
+	system("cls");
 	int x = 1, y = 1;
 	course* pcur = phead;
 	while (pcur != nullptr) {
-		gotoXY(x, y);
+		//gotoXY(x, y);
 		wcout << pcur->IDcourse << " ";
 		wcout << pcur->namecourse << " ";
 		wcout << pcur->teacher << " ";
@@ -113,22 +112,26 @@ void deletecourse(course*& phead, wstring t) {
 void outputlistcourse(course* phead) {
 	wfstream f;
 	f.open("course.csv", ios::out);
+	std::locale loc(std::locale(), new std::codecvt_utf8<wchar_t>);
+	f.imbue(loc);
 	course* pcur = phead;
 	while (pcur != nullptr) {
-		f << pcur->IDcourse << ",";
-		f << pcur->namecourse << ",";
-		f << pcur->teacher << ",";
-		f << pcur->credit << ",";
-		f << pcur->dow1 << ",";
-		f << pcur->s1 << ",";
-		f << pcur->dow2 << ",";
+		f << pcur->IDcourse << L",";
+		f << pcur->namecourse << L",";
+		f << pcur->teacher << L",";
+		f << pcur->credit << L",";
+		f << pcur->dow1 << L",";
+		f << pcur->s1 << L",";
+		f << pcur->dow2 << L",";
 		f << pcur->s2 << endl;
 		pcur = pcur->pNext;
 	}
 	f.close();
 }
 void addnewcourse(){
+	std::locale loc(std::locale(), new std::codecvt_utf8<wchar_t>);
 	wfstream f;
+	f.imbue(loc);
 	course* a = nullptr;
 	a = new course;
 	a->pNext = nullptr;
