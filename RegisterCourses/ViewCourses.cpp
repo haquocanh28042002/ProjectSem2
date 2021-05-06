@@ -22,7 +22,7 @@ void Read_Student_List(STUDENT*& T, wstring filename) {
 		T = new STUDENT;
 		STUDENT* pcur = T;
 		wstring No; wstring ID;
-		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth;
+		wstring firstname; wstring lastname; wstring gender; wstring dateofbirth; wstring socialID;
 		while (!filelist.eof()) {
 			if (T == nullptr) {
 				T = new STUDENT;
@@ -35,16 +35,19 @@ void Read_Student_List(STUDENT*& T, wstring filename) {
 			}
 			getline(filelist, No, L',');
 			getline(filelist, ID, L',');
-			getline(filelist, firstname, L',');
 			getline(filelist, lastname, L',');
+			getline(filelist, firstname, L',');
 			getline(filelist, gender, L',');
+			getline(filelist, dateofbirth, L',');
+			getline(filelist, socialID, L',');
 
 			pcur->No = No;
 			pcur->ID = ID;
-			pcur->firstname = firstname;
 			pcur->lastname = lastname;
+			pcur->firstname = firstname;
 			pcur->gender = gender;
 			pcur->dateofbirth = dateofbirth;
+			pcur->socialID = socialID;
 			pcur->pnext = nullptr;
 		}
 	}
@@ -55,20 +58,22 @@ void View_List(STUDENT*& T) {
 	if (T == nullptr) return;
 	else {
 		STUDENT* pcur = T;
-		wcout   << "No" 	<< setw(20)
-			<< "StudentID"	<< setw(20)
-			<< "Firstname"	<< setw(20)
-			<< "Lastname"	<< setw(20)
-			<< "Gender"	<< setw(20)
-			<< "DayofBirth" << endl;
+		wcout << "No" << setw(20)
+			<< "StudentID" << setw(20)
+			<< "Last name" << setw(20)
+			<< "First name" << setw(20)
+			<< "Gender" << setw(20)
+			<< "Date of birth" << setw(20)
+			<< "Social ID" << endl;
 
 		while (T != nullptr) {
-			wcout	<< T->No	  << setw(20)
-				<< T->ID	  << setw(10)
-				<< T->firstname   << setw(20)
-				<< T->lastname	  << setw(20)
-				<< T->gender	  << setw(20)
-				<< T->dateofbirth << endl;
+			wcout << T->No << setw(20)
+				<< T->ID << setw(10)
+				<< T->lastname << setw(20)
+				<< T->firstname << setw(20)
+				<< T->gender << setw(20)
+				<< T->dateofbirth << setw(20)
+				<< T->socialID << endl;
 			T = T->pnext;
 		}
 	}
@@ -107,22 +112,22 @@ void Read_File_Courses(STAFF*& S, wstring filecoursesname) {
 void View_Courses(STUDENT* T) {
 	if (T == nullptr) return;
 	else {
-		wcout 	<< "NO"		<< setw(20) 
+		wcout << "NO" << setw(20) 
 			<< "COURSENAME" << setw(20) 
-			<< "TEACHERNAME"<< setw(20) 
-			<< "CREDIT"	<< setw(20) 
-			<< "MAXPERSON"	<< setw(20) 
-			<< "dayLT"	<< setw(20) 
-			<< "DAYTH"	<< endl;
+			<< "TEACHERNAME" << setw(20) 
+			<< "CREDIT" << setw(20) 
+			<< "MAXPERSON" << setw(20) 
+			<< "dayLT" << setw(20) 
+			<< "DAYTH" << endl;
 
 		while (T != nullptr) {
-			wcout 	<< T->no	 << setw(20) 
+			wcout << T->no << setw(20) 
 				<< T->coursename << setw(20) 
 				<< T->teachername<< setw(20) 
-				<< T->credit	 << setw(20) 
-				<< T->maxperson  << setw(20) 
-				<< T->daylt	 << setw(20) 
-				<< T->dayth	 << endl;
+				<< T->credit << setw(20) 
+				<< T->maxperson << setw(20) 
+				<< T->daylt	<< setw(20) 
+				<< T->dayth << endl;
 			T = T->pnext;
 		}
 	}
@@ -166,8 +171,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file1.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file1 << pcur->No << L"," 
 					<< pcur->ID << L"," 
-					<< pcur->firstname << L"," 
 					<< pcur->lastname << L"," 
+					<< pcur->firstname << L"," 
 					<< pcur->gender << L"," 
 					<< pcur->dateofbirth << L"," 
 					<< pcur->socialID << endl;
@@ -178,8 +183,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file2.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file2 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
@@ -190,8 +195,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file3.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file3 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
@@ -202,8 +207,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file4.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file4 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
@@ -214,8 +219,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file5.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file5 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
@@ -226,8 +231,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file6.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file6 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
@@ -238,8 +243,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file7.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file7 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
@@ -250,8 +255,8 @@ void Write_Student_To_FileCourses(STUDENT*& T) {
 				file8.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 				file8 << pcur->No << L","
 					<< pcur->ID << L","
-					<< pcur->firstname << L","
 					<< pcur->lastname << L","
+					<< pcur->firstname << L","
 					<< pcur->gender << L","
 					<< pcur->dateofbirth << L","
 					<< pcur->socialID << endl;
