@@ -26,6 +26,7 @@ void addnewstudent(wstring classx, node* phead)
 	No = to_wstring(t + 1);
 	pcur->pnext = new node;
 	pcur = pcur->pnext;
+	wcin.ignore();
 	wcout << "\n the first name: ";
 	getline(wcin, firstname);
 	wcout << "\n the last name: ";
@@ -87,7 +88,6 @@ void inputstudentscore(wstring classx, node*& phead)
 			{
 				pcur->pnext = new node;
 				pcur = pcur->pnext;
-				
 			}
 			getline(student, pcur->No, L',');			
 			getline(student, pcur->ID, L',');
@@ -153,7 +153,7 @@ void read_course(wstring classx,node*& phead1)
 		}
 	}
 	student.close();
-	scorecourse(phead1);
+	//scorecourse(phead1);
 }
 void scorecourse(node* phead1)
 {
