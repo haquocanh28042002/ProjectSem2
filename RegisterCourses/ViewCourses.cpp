@@ -1,17 +1,18 @@
 #include "HeaderCourses.h"
 
 void SetMode() {
-	_setmode(_fileno(stdin), _O_U16TEXT);
-	_setmode(_fileno(stdout), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_WTEXT);
+	_setmode(_fileno(stdin), _O_WTEXT);
 	HANDLE hdlConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_FONT_INFOEX consoleFont;
 	consoleFont.cbSize = sizeof(consoleFont);
 	GetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
 	memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
+	SetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
 }
 
 void Read_Student_List(STUDENT*& T, wstring filename) {
-	wofstream filelist;
+	wifstream filelist;
 	filelist.open(filename, ios_base::in);
 	filelist.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filelist.fail() == true) {
@@ -57,7 +58,6 @@ void Read_Student_List(STUDENT*& T, wstring filename) {
 void View_List(STUDENT*& T) {
 	if (T == nullptr) return;
 	else {
-		STUDENT* pcur = T;
 		wcout << "No" << setw(20)
 			<< "StudentID" << setw(20)
 			<< "Last name" << setw(20)
@@ -80,31 +80,42 @@ void View_List(STUDENT*& T) {
 }
 
 void Read_File_Courses(STAFF*& S, wstring filecoursesname) {
-	wofstream filecourses;
+	wifstream filecourses;
 	filecourses.open(filecoursesname, ios_base::in);
-	filecourses.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 	if (filecourses.fail() == true) {
-		cout << "File does not exist" << endl;
+		wcout << "File does not exist" << endl;
 		system("pause");
 	}
-	STAFF* pcur = nullptr;
-	while (!filecourses.eof()) {
-		if (S == nullptr) {
-			S = new STAFF;
-			pcur = S;
+	else {
+		S = new STAFF;
+		STAFF* pcur = S;
+		wstring no; wstring coursename; wstring teachername; wstring credit; wstring maxperson; wstring daylt; wstring dayth;
+		while (!filecourses.eof()) {
+			if (S == nullptr) {
+				S = new STAFF;
+				pcur = S;
+			}
+			else {
+				pcur->pnext = new STAFF;
+				pcur = pcur->pnext;
+			}
+			getline(filecourses, pcur->no, L',');
+			getline(filecourses, pcur->coursename, L',');
+			getline(filecourses, pcur->teachername, L',');
+			getline(filecourses, pcur->credit, L',');
+			getline(filecourses, pcur->maxperson, L',');
+			getline(filecourses, pcur->daylt, L',');
+			getline(filecourses, pcur->dayth);
+
+			pcur->no = no;
+			pcur->coursename = coursename;
+			pcur->teachername = teachername;
+			pcur->credit = credit;
+			pcur->maxperson = maxperson;
+			pcur->daylt = daylt;
+			pcur->dayth = dayth;
+			pcur->pnext = nullptr;
 		}
-		else {
-			pcur->pnext = new STAFF;
-			pcur = pcur->pnext;
-		}
-		getline(filecourses, pcur->no, L',');
-		getline(filecourses, pcur->coursename, L',');
-		getline(filecourses, pcur->teachername, L',');
-		getline(filecourses, pcur->credit, L',');
-		getline(filecourses, pcur->maxperson, L',');
-		getline(filecourses, pcur->daylt, L',');
-		getline(filecourses, pcur->dayth);
-		pcur->pnext = nullptr;
 	}
 	filecourses.close();
 }
@@ -133,13 +144,26 @@ void View_Courses(STUDENT* T) {
 	}
 }
 
-void Delete_Student_List(STAFF*& S) {
+void Delete_Student_List_Staff(STAFF*& S) {
 	if (S == nullptr) return;
 	else {
 		STAFF* ptemp = nullptr;
 		while (S != nullptr) {
 			ptemp = S;
 			S = S->pnext;
+			delete ptemp;
+			ptemp = nullptr;
+		}
+	}
+}
+
+void Delete_Student_List_Student(STUDENT*& T) {
+	if (T == nullptr) return;
+	else {
+		STUDENT* ptemp = nullptr;
+		while (T != nullptr) {
+			ptemp = T;
+			T = T->pnext;
 			delete ptemp;
 			ptemp = nullptr;
 		}
@@ -160,11 +184,10 @@ void Delete_Courses_List(STUDENT*& T) {
 }
 
 void Write_Student_To_FileCourses(STUDENT*& T) {
-	wifstream file1, file2, file3, file4, file5, file6, file7, file8;
+	wofstream file1, file2, file3, file4, file5, file6, file7, file8;
 	if (T == nullptr) return;
 	else {
-		STUDENT* pcur = nullptr;
-		pcur = T;
+		STUDENT* pcur = T;
 		while (pcur != nullptr) {
 			if (pcur->no == L"1") {
 				file1.open(L"Mon1.csv", std::ios_base::app);
