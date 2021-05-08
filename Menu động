@@ -1,0 +1,151 @@
+#include <iostream>
+#include <conio.h>
+#include <stdio.h>
+#include <Windows.h>
+
+using namespace std;
+
+void gotoxy(int column, int line)
+
+{
+
+    COORD coord;
+
+    coord.X = column;
+
+    coord.Y = line;
+
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+
+}
+
+int move() {
+
+    char c = _getch();
+
+    if ((int)c == -32) c = _getch();
+
+    switch ((int)c) {
+
+    case 80:
+        return 1; //"Xuong";
+
+    case 72:
+        return 2; //"Len";
+
+    case 77:
+        return 3; //"Phai";       
+
+    case 75:
+        return 4; //"Trai";
+
+    case 27:
+        return 8; //Nut ESC thoat
+
+    case 13:
+        return 5; //Nut Enter
+
+    default:
+        return 0; //"Sai";
+    }
+}
+
+void printMenu();
+void Menu();
+
+
+string* item; //Mảng lưu tên của các menu
+int _numberOfItem; //Số lượng menu
+
+int numberOfItem() {
+    return _numberOfItem;
+}
+
+//khởi tạo data cho menu
+void Menu() {
+
+    item = new string[100];
+
+    _numberOfItem = 4;
+
+    item[0] = "CHOI";
+
+    item[1] = "DIEM CAO";
+
+    item[2] = "HUONG DAN";
+
+    item[3] = "THOAT";
+
+}
+
+//in menu ra màn hình
+void printMenu() {
+
+    for (int i = 0; i < _numberOfItem; i++) {
+
+        gotoxy(3, i);
+
+        cout << item[i];
+
+        Sleep(100); //Tạm dừng 100ms
+
+    }
+
+}
+
+int main()
+
+{
+    Menu(); //khởi tạo
+    int x;
+    int line = 0; //Vị trí dòng đầu tiên của menu
+    bool thoat = false;
+    printMenu();
+
+    gotoxy(0, line);
+    cout << (char)1; //(char)1 là hình con trỏ trỏ tới menu :)
+
+    while (!thoat) {
+        if (_kbhit()) {
+            x = move();
+            gotoxy(0, line);
+            cout << " "; //Xóa con trỏ ở vị trí cũ
+            switch (x) {
+            case 1: //"xuống"
+            case 3: //"phải"
+            {
+                line++;
+                if (line >= numberOfItem()) line = 0;
+                break;
+            }
+            case 2: //"lên"
+            case 4: //"trái"
+            {
+                line--;
+                if (line < 0) line = numberOfItem() - 1;
+                break;
+            }
+            case 5: //"Enter"
+            {
+                system("cls");
+                gotoxy(0,0);
+                cout << "Ban chon " << line;
+                thoat = true;
+                break;
+            }
+            case 8://"Esc"
+                thoat = true;
+                break;
+            }
+            if (!thoat) {
+                gotoxy(0, line);
+                cout << (char)1;
+            }
+        }
+    }
+   
+    //sau khi chạy xong đoạn trên ta sẽ có được biến "line"
+    //->  "line" lưu giá trị mà người dùng chọn 
+
+    return 0;
+}
