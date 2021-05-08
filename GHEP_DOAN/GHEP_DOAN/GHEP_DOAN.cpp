@@ -29,8 +29,8 @@ int main() {
 		break;
 	}
 	case 2: {
-		/*input_student(K, n, filestudent);
-		login_student(K, n);*/
+		input_student(K, n, filestudent);
+		login_student(K, n);
 		int n = 1;
 		while (n != 0) {
 			S = nullptr;
@@ -58,12 +58,11 @@ int main() {
 			}
 			case 2: {
 				read_file_courses_student(T, writefile);
-				output_enroll_course_student(T);
 				wcout << "input course to remove(exit if input 0): ";
 				wcin >> x;
 				while (x != L"0") {
-					remove_course_student(T, x);
 					output_enroll_course_student(T);
+					remove_course_student(T, x);
 					wcout << "input course to remove(exit if input 0): ";
 					wcin >> x;
 				}
@@ -157,7 +156,7 @@ int main() {
 				}
 			}
 			case 0:break;
-
+			
 			}
 
 		}
