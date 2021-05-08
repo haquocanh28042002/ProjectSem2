@@ -1,14 +1,16 @@
 ﻿#include"myproject.h"
-void menu()
+#include"console.h"
+#include"Menu.h"
+void menu1()
 {
-    node* phead = nullptr;
-    node* phead1 = nullptr;
+    STAFF* phead = nullptr;
+    STAFF* phead1 = nullptr;
     wstring class1 = L"inputstudentscore.csv";
-    wstring class2 = L"inputstudentscore2.txt";
-    wstring class3 = L"inputstudentscore3.txt";
-    wstring class4 = L"inputstudentscore4.txt";
+    wstring class2 = L"inputstudentscore2.csv";
+    wstring class3 = L"inputstudentscore3.csv";
+    wstring class4 = L"inputstudentscore4.csv";
     wstring course = L"inputcourse.csv";
-    wstring course1=L"inputcourse1.csv";
+    wstring course1 = L"inputcourse1.csv";
     wstring course2 = L"inputcourse2.csv";
     wstring course3 = L"inputcourse3.csv";
     wstring course4 = L"inputcourse4.csv";
@@ -17,7 +19,7 @@ void menu()
     int n = 1;
     while (n != 0)
     {
-        wcout << "\School year: " << endl;
+        wcout << "\nSchool year: " << endl;
         wcout << "1. 2020-2021\n     1st year student \n";
         wcout << "2. 2021-2022\n     2st year student \n";
         wcout << "3. 2022-2023\n     3st year student \n";
@@ -94,12 +96,12 @@ void menu()
                                     {
                                         wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                         wcout << L"\n2. VI TÍCH PHÂN  ";
-                                        wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                        wcout << L"\n4.TRIẾT HỌC ";
-                                        wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                        wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                        wcout << L"\n7.TOÁN RỜI RẠC ";
-                                        wcout << "\n0.cancel\n";
+                                        wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                        wcout << L"\n4. TRIẾT HỌC ";
+                                        wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                        wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                        wcout << L"\n7. TOÁN RỜI RẠC ";
+                                        wcout << "\n0. cancel\n";
                                         wcin >> t4;
                                         system("cls");
                                         switch (t4)
@@ -152,12 +154,12 @@ void menu()
                                             {
                                                 wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                                 wcout << L"\n2. VI TÍCH PHÂN  ";
-                                                wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                                wcout << L"\n4.TRIẾT HỌC ";
-                                                wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                                wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                                wcout << L"\n7.TOÁN RỜI RẠC ";
-                                                wcout << "\n0.cancel\n";
+                                                wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                                wcout << L"\n4. TRIẾT HỌC ";
+                                                wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                                wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                                wcout << L"\n7. TOÁN RỜI RẠC ";
+                                                wcout << "\n0. cancel\n";
                                                 wcin >> t4;
                                                 system("cls");
                                             }
@@ -224,12 +226,12 @@ void menu()
                                     {
                                         wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                         wcout << L"\n2. VI TÍCH PHÂN  ";
-                                        wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                        wcout << L"\n4.TRIẾT HỌC ";
-                                        wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                        wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                        wcout << L"\n7.TOÁN RỜI RẠC ";
-                                        wcout << "\n0.cancel\n";
+                                        wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                        wcout << L"\n4. TRIẾT HỌC ";
+                                        wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                        wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                        wcout << L"\n7. TOÁN RỜI RẠC ";
+                                        wcout << "\n0. cancel\n";
                                         wcin >> t4;
                                         system("cls");
                                         switch (t4)
@@ -282,12 +284,12 @@ void menu()
                                             {
                                                 wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                                 wcout << L"\n2. VI TÍCH PHÂN  ";
-                                                wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                                wcout << L"\n4.TRIẾT HỌC ";
-                                                wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                                wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                                wcout << L"\n7.TOÁN RỜI RẠC ";
-                                                wcout << "\n0.cancel\n";
+                                                wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                                wcout << L"\n4. TRIẾT HỌC ";
+                                                wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                                wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                                wcout << L"\n7. TOÁN RỜI RẠC ";
+                                                wcout << "\n0. cancel\n";
                                                 wcin >> t4;
                                                 system("cls");
                                             }
@@ -355,12 +357,12 @@ void menu()
                                     {
                                         wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                         wcout << L"\n2. VI TÍCH PHÂN  ";
-                                        wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                        wcout << L"\n4.TRIẾT HỌC ";
-                                        wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                        wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                        wcout << L"\n7.TOÁN RỜI RẠC ";
-                                        wcout << "\n0.cancel\n";
+                                        wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                        wcout << L"\n4. TRIẾT HỌC ";
+                                        wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                        wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                        wcout << L"\n7. TOÁN RỜI RẠC ";
+                                        wcout << "\n0. cancel\n";
                                         wcin >> t4;
                                         system("cls");
                                         switch (t4)
@@ -413,12 +415,12 @@ void menu()
                                             {
                                                 wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                                 wcout << L"\n2. VI TÍCH PHÂN  ";
-                                                wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                                wcout << L"\n4.TRIẾT HỌC ";
-                                                wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                                wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                                wcout << L"\n7.TOÁN RỜI RẠC ";
-                                                wcout << "\n0.cancel\n";
+                                                wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                                wcout << L"\n4. TRIẾT HỌC ";
+                                                wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                                wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                                wcout << L"\n7. TOÁN RỜI RẠC ";
+                                                wcout << "\n0. cancel\n";
                                                 wcin >> t4;
                                                 system("cls");
                                             }
@@ -490,12 +492,12 @@ void menu()
                                     {
                                         wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                         wcout << L"\n2. VI TÍCH PHÂN  ";
-                                        wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                        wcout << L"\n4.TRIẾT HỌC ";
-                                        wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                        wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                        wcout << L"\n7.TOÁN RỜI RẠC ";
-                                        wcout << "\n0.cancel\n";
+                                        wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                        wcout << L"\n4. TRIẾT HỌC ";
+                                        wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                        wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                        wcout << L"\n7. TOÁN RỜI RẠC ";
+                                        wcout << "\n0. cancel\n";
                                         wcin >> t4;
                                         system("cls");
                                         switch (t4)
@@ -548,12 +550,12 @@ void menu()
                                             {
                                                 wcout << L"\n1. KỸ THUẬT LẬP TRÌNH  ";
                                                 wcout << L"\n2. VI TÍCH PHÂN  ";
-                                                wcout << L"\n3.VẬT LÝ ĐẠI CƯƠNG ";
-                                                wcout << L"\n4.TRIẾT HỌC ";
-                                                wcout << L"\n5.NHẬP MÔN LẬP TRÌNH ";
-                                                wcout << L"\n6.KINH TẾ ĐẠI CƯƠNG ";
-                                                wcout << L"\n7.TOÁN RỜI RẠC ";
-                                                wcout << "\n0.cancel\n";
+                                                wcout << L"\n3. VẬT LÝ ĐẠI CƯƠNG ";
+                                                wcout << L"\n4. TRIẾT HỌC ";
+                                                wcout << L"\n5. NHẬP MÔN LẬP TRÌNH ";
+                                                wcout << L"\n6. KINH TẾ ĐẠI CƯƠNG ";
+                                                wcout << L"\n7. TOÁN RỜI RẠC ";
+                                                wcout << "\n0. cancel\n";
                                                 wcin >> t4;
                                                 system("cls");
                                             }
@@ -593,7 +595,7 @@ void menu()
                     break;
                 }
                 case 2:
-                    
+                    menu(thaotac,4);
                     break;
                 case 0: break;
              
@@ -603,14 +605,17 @@ void menu()
         }
         case 2:
         {
+            wcout << "no data ";
             break;
         }
         case 3: 
         {
+            wcout << "no data ";
             break;
         }
         case 4:
         {
+            wcout << "no data ";
             break;
         }
         case 0: break;
@@ -625,9 +630,7 @@ void menu()
             wcout << "0. cancel\n";
             wcin >> n;
             system("cls");
-        }
-        
-
+        }        
     }
 }
 void main()
@@ -640,14 +643,5 @@ void main()
     GetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
     memcpy(consoleFont.FaceName, L"Consolas", sizeof(consoleFont.FaceName));
     SetCurrentConsoleFontEx(hdlConsole, FALSE, &consoleFont);
-     menu();
-   /* node* phead = nullptr;
-    node* phead1 = nullptr;
-    wstring s = L"inputcourse.csv";
-    wstring class1 = L"inputstudentscore.txt";
-    inputstudentscore(class1,phead);
-    read_course(s, phead1);*/
-
-
-    
+     menu1();    
 }
