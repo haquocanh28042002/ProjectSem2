@@ -15,7 +15,6 @@ int menu(str thaotac[4], int n) {
 	int tt = 0; //thao tacs thu nhat
 	int* mau = new int[n];
 	for (int i = 0; i < n; i++) mau[i] = MAUCHU;
-	//mau[0] = MAUNEN;
 	while (1)
 	{
 		//in menu
